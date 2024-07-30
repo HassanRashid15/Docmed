@@ -1,0 +1,37 @@
+
+.footer-page p{
+    font-size: 1rem;
+    font-weight:400;
+}
+.footer-page{
+    min-height: calc(100% - 64px - 24px);
+}
+.footer-page-custom{
+    background-color: #003cff9a;
+}
+.footer-parent-custom{
+    padding: 45px;
+}
+.footer-parent-custom p{
+    color:whitesmoke;
+}
+.footer-parent-custom h6{
+    color: whitesmoke;
+    font-weight: 600 !important;
+}
+.connected-section-custom{
+width: 90%;
+margin: auto;
+}
+.connected-section-custom span{
+    color: white;
+}
+.connected-section-custom a i{
+    color: white;
+}
+.footer-copyright-area{
+    margin-left: 5px;
+}
+.footer-alignment-custom{
+    max-width: 100% !important;
+}

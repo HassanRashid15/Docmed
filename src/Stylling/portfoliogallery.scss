@@ -1,0 +1,88 @@
+/* Portfolio Gallery Styles */
+.portfolio {
+    padding: 80px 0;
+  }
+  
+  .top-side {
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #f39c12;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  
+  .filters ul {
+    list-style: none;
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .filters ul li {
+    display: inline-block;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #888;
+    font-size: 16px;
+  }
+  
+  .filters ul li.active {
+    color: #f39c12;
+  }
+  
+  .filters-content {
+    margin-top: 30px;
+  }
+  
+  .row.grid {
+    margin-top: 30px;
+  }
+  
+  .item {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  
+  .item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .item:hover img {
+    transform: scale(1.1);
+  }
+  
+  .p-inner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    color: #fff;
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+  
+  .p-inner h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .p-inner .cat {
+    font-size: 14px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 767px) {
+    .filters ul li {
+      font-size: 14px;
+    }
+  }
+  

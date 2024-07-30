@@ -1,0 +1,128 @@
+
+.navbar-parent {
+    transition: top 0.3s;
+  }
+  
+  .navbar-parent.hidden {
+    top: -100px; 
+  }
+  
+  .navbar-parent.visible {
+    top: 0;
+  }
+.navbar-middle-custom{
+    justify-content: end ;
+    width: 100% ;
+}
+.navbar-page{
+    padding: 0 !important;
+}
+.navbar-middle-custom{
+margin: auto;
+}
+.navbar-toggler{
+    background-image: url();
+}
+.navbar-button-custom button{
+    background: #009DFF;
+    padding: 12px 26px;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid transparent;
+    color: #ffff;
+    border-radius: 4px;
+}
+.navbar-middle-custom{
+    width: 70%;
+  }
+.navbar-button-custom button:hover{
+    background: #fff !important;
+    color: #009DFF !important;
+    border: 1px solid #009DFF !important;
+    
+}
+.nav-link:focus, .nav-link:hover{
+    color: #009DFF !important;
+
+}
+.navbar-middle-custom .active{
+    color: #009dff !important;
+    
+}
+.navbar-page{
+    width: 90% !important;
+    padding: 0px;
+}
+.navbar-alignment-custom{
+    justify-content: end;
+}
+
+@media (max-width:1024px){
+    .navbar-alignment-custom{
+        justify-content: center;
+    }
+    .navbar-middle-custom{
+        align-items: center;
+    }
+}
+.navbar-middle-custom{
+    justify-content: center;
+    gap: 15px;
+}
+
+.navbar-alignment-custom{
+    width: 39%;
+}
+.navbar-middle-custom{
+    justify-content: end;
+}
+@media (min-width:992px) and (max-width:1024px){
+    .navbar-alignment-custom{
+        justify-content: end;
+    }
+}
+.navbar-parent{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+@media (max-width:1024px){
+    .navbar-alignment-custom{
+margin: auto;
+    }
+    .navbar-toggler:focus {
+         text-decoration: none !important; 
+         outline: 0 !important; 
+         box-shadow:none !important;
+    }
+    .navbar-toggler{
+border: none !important;
+color: #009DFF !important;
+    }
+}
+
+@media (max-width:500px){
+
+    .navbar-alignment-custom {
+        width: 50%;
+    }
+}
+.tab-image-custom:nth-child(1) {
+    justify-content: flex-start;
+}
+@media (max-width:767px){
+    .tab-image-custom:nth-child(1) {
+        justify-content: center;
+    }   
+}
+.navtab-parent{
+    background-color: #b6b6b621;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    background-color: unset !important;
+    border: unset !important;
+    color: #009dff !important; 
+    border: 1px solid transparent !important;
+}
+.nav-tabs li a{
+    font-size: 14px;
+    font-weight: 400;
+}
