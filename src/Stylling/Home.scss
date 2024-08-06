@@ -910,3 +910,10 @@ margin-bottom: 10px;
 .connected-section-custom-parent{
  background-color: #6589ff !important;   
 }
+
+
+@media (max-width: 1024px) {
+    .our-doc-custom h6 {
+        font-size: 80px;
+    }
+}

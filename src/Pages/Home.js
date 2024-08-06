@@ -90,10 +90,10 @@ function Home() {
 </p>
             <h6>Esteem spirit temper too say adieus who direct esteem. It esteems luckily or picture placing drawing. Apartments frequently or motionless on reasonable projecting expression.</h6>
             <ul>
-              <li><FaRegCheckCircle />Apartments frequently or motionless.</li>
-              <li><FaRegCheckCircle />Duis aute irure dolor in reprehenderit in voluptate.</li>
-              <li><FaRegCheckCircle />Voluptatem quia voluptas sit aspernatur.</li>
-            </ul>
+  <li data-aos="fade-right" data-aos-delay="300"><FaRegCheckCircle />Apartments frequently or motionless.</li>
+  <li data-aos="fade-right" data-aos-delay="500"><FaRegCheckCircle />Duis aute irure dolor in reprehenderit in voluptate.</li>
+  <li data-aos="fade-right" data-aos-delay="700"><FaRegCheckCircle />Voluptatem quia voluptas sit aspernatur.</li>
+</ul>
             <div className='welcome-section-button'>
               <button>Learn More</button>
             </div>
@@ -101,13 +101,17 @@ function Home() {
 
         </div>
         <div className='service-section-grandparent'>
-          <div className='service-section-grandparent-content'>
+          <div className='service-section-grandparent-content' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="300">
             <h6>SERVICES</h6>
             <h4>Services</h4>
             <h5>Services We Provide</h5>
           </div>
           <div className='serivce-section-parent d-flex'>
-            <div className='service-section'>
+            <div className='service-section' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="200">
               <div className='service-section-icon'>
 
               </div>
@@ -120,7 +124,9 @@ function Home() {
                 <button>Apply For A Bed</button>
               </div>
             </div>
-            <div className='service-section'>
+            <div className='service-section' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="400">
               <div className='service-section-icon'>
 
               </div>
@@ -133,11 +139,14 @@ function Home() {
                 <button>+9230-1234-4567</button>
               </div>
             </div>
-            <div className='service-section'>
+            <div className='service-section' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="600">
               <div className='service-section-icon'>
 
               </div>
               <div className='service-section-content'>
+              <LuStethoscope />
                 <h2>Chamber Service
                 </h2>
                 <h3>Clinical excellence must be the priority for any health care service provider.</h3>
@@ -146,7 +155,9 @@ function Home() {
                 <button>Make An Appointment</button>
               </div>
             </div>
-            <div className='service-section'>
+            <div className='service-section' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="800">
               <div className='service-section-icon'>
 
               </div>
@@ -164,7 +175,9 @@ function Home() {
         </div>
         <div className='department-parent-section'>
           <div className='department-section'>
-            <div className='department-content-section'>
+            <div className='department-content-section' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="300">
               <h5>DEPARTMENTS</h5>
               <h1>Our departments</h1>
               <p>Esteem spirit temper too say adieus who direct esteem.
@@ -172,7 +185,9 @@ function Home() {
             </div>
             <div className='department-card-body pt-4'>
               <div className='department-card-section' >
-                <div class="card">
+                <div class="card"  data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="300" >
                   <img src="..." class="card-img-top" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title">Eye Care</h5>
@@ -180,7 +195,9 @@ function Home() {
                     <a href="#" class="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card">
+                <div class="card"   data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="600">
                   <img src="..." class="card-img-top" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title">Physical Therapy</h5>
@@ -188,7 +205,9 @@ function Home() {
                     <a href="#" class="btn">Learn More</a>
                   </div>
                 </div>
-                <div class="card">
+                <div class="card"  data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="900">
                   <img src="..." class="card-img-top" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title">Dental Care</h5>
@@ -196,7 +215,9 @@ function Home() {
                     <a href="#" class="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card">
+                <div class="card"  data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="1200">
                   <img src="..." class="card-img-top" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title">Diagnostic Test</h5>
@@ -204,7 +225,9 @@ function Home() {
                     <a href="#" class="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card">
+                <div class="card"  data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="1500">
                   <img src="..." class="card-img-top" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title">Skin Surgery</h5>
@@ -212,7 +235,9 @@ function Home() {
                     <a href="#" class="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card">
+                <div class="card"  data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="1800">
                   <img src="..." class="card-img-top" alt="..." />
                   <div class="card-body">
                     <h5 class="card-title">Surgery Service</h5>
@@ -283,21 +308,21 @@ function Home() {
         <MDBTabsContent>
           <MDBTabsPane open={fillActive === 'tab1'}>
             <div className='tab-content-parent d-flex align-items-center'>
-              <div className='tab-icon-custom'>
+              <div className='tab-icon-custom' data-aos="fade-right" data-aos-delay="300">
                 <h1>Leading edge care for Your family</h1>
                 <p>Esteem spirit temper too say adieus who direct esteem. It esteems luckily picture placing drawing. Apartments frequently or motionless on reasonable projecting expression.</p>
               </div>
-              <div className='tab-image-custom'>
+              <div className='tab-image-custom' data-aos="fade-left" data-aos-delay="600">
                 <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Tab 1" />
               </div>
             </div>
           </MDBTabsPane>
           <MDBTabsPane open={fillActive === 'tab2'}>
           <div className='tab-content-parent d-flex align-items-center'>
-          <div className='tab-image-custom'>
+          <div className='tab-image-custom' data-aos="fade-left" data-aos-delay="600">
                 <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Tab 1" />
               </div>
-              <div className='tab-icon-custom'>
+              <div className='tab-icon-custom' data-aos="fade-right" data-aos-delay="300">
                 <h1>Leading edge care for Your family</h1>
                 <p>Esteem spirit temper too say adieus who direct esteem. It esteems luckily picture placing drawing. Apartments frequently or motionless on reasonable projecting expression.</p>
               </div>
@@ -306,11 +331,11 @@ function Home() {
           </MDBTabsPane>
           <MDBTabsPane open={fillActive === 'tab3'}>
           <div className='tab-content-parent d-flex align-items-center'>
-              <div className='tab-icon-custom'>
+              <div className='tab-icon-custom'data-aos="fade-right" data-aos-delay="300">
                 <h1>Leading edge care for Your family</h1>
                 <p>Esteem spirit temper too say adieus who direct esteem. It esteems luckily picture placing drawing. Apartments frequently or motionless on reasonable projecting expression.</p>
               </div>
-              <div className='tab-image-custom'>
+              <div className='tab-image-custom' ata-aos="fade-left" data-aos-delay="600">
                 <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Tab 1" />
               </div>
             </div>
@@ -318,29 +343,39 @@ function Home() {
         </MDBTabsContent>
         </div>
         <div className='slider-parent'>
-          <div className='our-doc-custom'>
+          <div className='our-doc-custom' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="300">
           
 <h1>Our Expert Doctors</h1>
 <p>Our expert doctors provide exceptional care with a commitment to your health.</p>
 <h6>DOCTORS</h6>
           </div>
         <Slider {...settings}>
-      <div className='slider-custom'>
+      <div className='slider-custom'data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="300">
         <img src={"https://preview.colorlib.com/theme/docmed/img/experts/1.png"}/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
-      <div className='slider-custom'>
+      <div className='slider-custom' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="600">
         <img src={"https://preview.colorlib.com/theme/docmed/img/experts/3.png"}/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
-      <div className='slider-custom'>
+      <div className='slider-custom' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="900">
         <img src={"https://preview.colorlib.com/theme/docmed/img/experts/2.png"}/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
-      <div className='slider-custom' >
+      <div className='slider-custom' data-aos="fade-up" 
+  data-aos-duration="1100" 
+  data-aos-delay="1300" >
         <img src={"https://preview.colorlib.com/theme/docmed/img/experts/4.png"}/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>

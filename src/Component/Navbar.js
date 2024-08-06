@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import { RxHamburgerMenu } from "react-icons/rx";
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
+import weblogo from "./../Assets/Images/weblogo.png";
 import Navbar from 'react-bootstrap/Navbar';
 
 function MyNavbar() {
@@ -46,7 +47,8 @@ function MyNavbar() {
   return (
     <Navbar expand="lg" className={`bg-white navbar-parent ${navbarVisible ? 'visible' : 'hidden'}`} fixed="top">
       <Container fluid className='navbar-page'>
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+        <img src ={weblogo}/>
+        <Navbar.Brand className='web-heading' href="#">DOCMED</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll">
           <RxHamburgerMenu />
         </Navbar.Toggle>
