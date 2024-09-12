@@ -9,9 +9,8 @@ function Footer() {
       <MDBContainer className='footer-alignment-custom text-center text-md-start mt-5'>
         <MDBRow className='mt-3'>
           <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
-            <h6 className='text-uppercase fw-bold mb-4'>
-              {/* <MDBIcon icon="gem" className="me-3" /> */}
-              Company name
+            <h6 className='fs-4 text-uppercase fw-bold mb-4'>
+            DOCMED
             </h6>
             <p>
               Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
@@ -116,9 +115,9 @@ function Footer() {
     </section>
     <div className='text-center p-4 text-white'>
     Copyright © 2024 
-      <a className='text-reset footer-copyright-area fw-bold'>
+    <em><a className='text-reset footer-copyright-area fw-bold'>
        HR TECH All rights reserved
-      </a>
+      </a></em>
     </div>
   </MDBFooter>
   </div>

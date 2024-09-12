@@ -22,7 +22,6 @@ function MyNavbar() {
       }
     };
 
-    // Check if the device is a laptop by checking the window width
     if (window.innerWidth > 1024) {
       window.addEventListener('scroll', handleScroll);
     }
