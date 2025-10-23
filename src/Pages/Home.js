@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Footer from "./../Component/Footer.js";
+import SEO from "./../Component/SEO.js";
 import { LuStethoscope } from "react-icons/lu";
 import { IoMdNutrition } from "react-icons/io";
 import Slider from "react-slick";
@@ -61,8 +62,66 @@ function Home() {
       }
     ]
   };
+  const homeStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    "name": "Docmed Medical Center",
+    "description": "Leading healthcare provider offering comprehensive medical services including emergency care, cardiology, neurology, ophthalmology, and more.",
+    "url": "https://docmed.com",
+    "logo": "https://docmed.com/images/logo.png",
+    "image": "https://docmed.com/images/docmed-facility.jpg",
+    "telephone": "+1-555-123-4567",
+    "email": "info@docmed.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Medical Center Drive",
+      "addressLocality": "Healthcare District",
+      "addressRegion": "NY",
+      "postalCode": "10001",
+      "addressCountry": "US"
+    },
+    "openingHours": "Mo-Fr 08:00-20:00, Sa 09:00-17:00, Su 10:00-16:00",
+    "medicalSpecialty": [
+      "Cardiology",
+      "Neurology", 
+      "Ophthalmology",
+      "Dentistry",
+      "Emergency Medicine",
+      "General Medicine",
+      "Pediatrics",
+      "Radiology"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Medical Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "MedicalProcedure",
+            "name": "Emergency Care"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "MedicalProcedure",
+            "name": "Cardiology Services"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <>
+      <SEO
+        title="Home - Premier Healthcare Services"
+        description="Docmed Medical Center provides exceptional healthcare services with expert doctors, advanced technology, and 24/7 emergency care. Your trusted healthcare partner for over 25 years."
+        keywords="medical center, healthcare, hospital, emergency care, cardiology, neurology, ophthalmology, dentistry, medical services, patient care, healthcare provider, doctor appointments"
+        canonical="/"
+        structuredData={homeStructuredData}
+      />
       <div className='home-page'>
         <div className='hero-section'>
           <div className='hero-section-content'>
