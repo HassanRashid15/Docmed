@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import Footer from "./../Component/Footer.js";
 import SEO from "./../Component/SEO.js";
 import { LuStethoscope } from "react-icons/lu";
 import { IoMdNutrition } from "react-icons/io";
+import { ReactTicker } from "@guna81/react-ticker";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import docpic from "./../Assets/Images/docpic.png";
+import VectorSVG from "./../Assets/Images/Vector.svg";
 import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
 import { LiaHospitalAltSolid } from "react-icons/lia";
 import {
@@ -15,7 +18,7 @@ import {
   MDBTabsPane
 } from 'mdb-react-ui-kit';
 import { FaRegCheckCircle } from "react-icons/fa";
-function Home() {
+function Home({ navbarVisible }) {
   const [fillActive, setFillActive] = useState('tab1');
 
   const handleFillClick = (value) => {
@@ -62,25 +65,37 @@ function Home() {
       }
     ]
   };
+
   const homeStructuredData = {
     "@context": "https://schema.org",
     "@type": "MedicalOrganization",
     "name": "Docmed Medical Center",
-    "description": "Leading healthcare provider offering comprehensive medical services including emergency care, cardiology, neurology, ophthalmology, and more.",
+    "alternateName": "Docmed",
+    "description": "Leading healthcare provider offering comprehensive medical services including emergency care, cardiology, neurology, ophthalmology, and more. Your trusted healthcare partner for over 25 years.",
     "url": "https://docmed.com",
     "logo": "https://docmed.com/images/logo.png",
     "image": "https://docmed.com/images/docmed-facility.jpg",
-    "telephone": "+1-555-123-4567",
-    "email": "info@docmed.com",
+    "telephone": "+1-234-678-9108-99",
+    "email": "contact@docmed.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Medical Center Drive",
-      "addressLocality": "Healthcare District",
-      "addressRegion": "NY",
-      "postalCode": "10001",
+      "streetAddress": "1055 Arthur ave Elk Groot, 67",
+      "addressLocality": "New Palmas",
+      "addressRegion": "South Carolina",
+      "postalCode": "29150",
       "addressCountry": "US"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "33.6846",
+      "longitude": "-80.2106"
+    },
     "openingHours": "Mo-Fr 08:00-20:00, Sa 09:00-17:00, Su 10:00-16:00",
+    "sameAs": [
+      "https://www.facebook.com/docmed",
+      "https://www.twitter.com/docmed",
+      "https://www.linkedin.com/company/docmed"
+    ],
     "medicalSpecialty": [
       "Cardiology",
       "Neurology", 
@@ -99,17 +114,50 @@ function Home() {
           "@type": "Offer",
           "itemOffered": {
             "@type": "MedicalProcedure",
-            "name": "Emergency Care"
+            "name": "Emergency Care",
+            "description": "24/7 emergency medical services"
           }
         },
         {
           "@type": "Offer", 
           "itemOffered": {
             "@type": "MedicalProcedure",
-            "name": "Cardiology Services"
+            "name": "Cardiology",
+            "description": "Heart and cardiovascular care"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "MedicalProcedure",
+            "name": "Neurology",
+            "description": "Brain and nervous system care"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "MedicalProcedure",
+            "name": "Ophthalmology",
+            "description": "Eye care and vision services"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "MedicalProcedure",
+            "name": "Dentistry",
+            "description": "Dental care and oral health"
           }
         }
       ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
     }
   };
 
@@ -122,7 +170,7 @@ function Home() {
         canonical="/"
         structuredData={homeStructuredData}
       />
-      <div className='home-page'>
+      <div className={`home-page ${navbarVisible ? 'navbar-visible' : 'navbar-hidden'}`}>
         <div className='hero-section'>
           <div className='hero-section-content'>
             <h1 className= 'data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"'>
@@ -134,9 +182,27 @@ function Home() {
             </div>
           </div>
         </div>
+        
+        {/* Medical Services Ticker */}
+        <div className='ticker-wrap'>
+          <div className='ticker'>
+            <span className='item-collection-1'>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+            </span>
+            <span className='item-collection-2'>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+            </span>
+          </div>
+        </div>
         <div className='welcome-section d-flex'>
           <div className='welcome-section-image-custom'>
-            <img src={docpic} />
+            <img src={docpic} alt="Professional doctor providing healthcare services at Docmed Medical Center" />
           </div>
           <div className='welcome-section-content data-aos-fade-up' 
   data-aos="fade-up" 
@@ -244,64 +310,64 @@ function Home() {
             </div>
             <div className='department-card-body pt-4'>
               <div className='department-card-section' >
-                <div class="card"  data-aos="fade-up" 
+                <div className="card"  data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="300" >
-                  <img src="..." class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">Eye Care</h5>
-                    <p class="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" class="btn ">Learn More</a>
+                  <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Eye Care" />
+                  <div className="card-body">
+                    <h5 className="card-title">Eye Care</h5>
+                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
+                    <a href="#" className="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card"   data-aos="fade-up" 
+                <div className="card"   data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="600">
-                  <img src="..." class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">Physical Therapy</h5>
-                    <p class="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" class="btn">Learn More</a>
+                  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Physical Therapy" />
+                  <div className="card-body">
+                    <h5 className="card-title">Physical Therapy</h5>
+                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
+                    <a href="#" className="btn">Learn More</a>
                   </div>
                 </div>
-                <div class="card"  data-aos="fade-up" 
+                <div className="card"  data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="900">
-                  <img src="..." class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">Dental Care</h5>
-                    <p class="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" class="btn ">Learn More</a>
+                  <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Dental Care" />
+                  <div className="card-body">
+                    <h5 className="card-title">Dental Care</h5>
+                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
+                    <a href="#" className="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card"  data-aos="fade-up" 
+                <div className="card"  data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="1200">
-                  <img src="..." class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">Diagnostic Test</h5>
-                    <p class="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" class="btn ">Learn More</a>
+                  <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Diagnostic Test" />
+                  <div className="card-body">
+                    <h5 className="card-title">Diagnostic Test</h5>
+                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
+                    <a href="#" className="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card"  data-aos="fade-up" 
+                <div className="card"  data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="1500">
-                  <img src="..." class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">Skin Surgery</h5>
-                    <p class="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" class="btn ">Learn More</a>
+                  <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Skin Surgery" />
+                  <div className="card-body">
+                    <h5 className="card-title">Skin Surgery</h5>
+                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
+                    <a href="#" className="btn ">Learn More</a>
                   </div>
                 </div>
-                <div class="card"  data-aos="fade-up" 
+                <div className="card"  data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="1800">
-                  <img src="..." class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">Surgery Service</h5>
-                    <p class="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" class="btn">Learn More</a>
+                  <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Surgery Service" />
+                  <div className="card-body">
+                    <h5 className="card-title">Surgery Service</h5>
+                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
+                    <a href="#" className="btn">Learn More</a>
                   </div>
                 </div>
 
@@ -315,7 +381,7 @@ function Home() {
 
         {/* <MDBCarousel showIndicators showControls fade interval={50000}>
       <MDBCarouselItem itemId={1}>
-        <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg' className='d-block w-100' alt='...' />
+        <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg' className='d-block w-100' alt='Modern medical facility with advanced healthcare technology' />
         <MDBCarouselCaption>
           <h5>Donec imperdiet congue orci consequat mattis. Donec rutrum porttitor.
           sollicitudin. Pellentesque id dolor tempor sapien feugiat ultrices nec sed neque. </h5>
@@ -324,7 +390,7 @@ function Home() {
       </MDBCarouselItem>
 
       <MDBCarouselItem itemId={2}>
-        <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg' className='d-block w-100' alt='...' />
+        <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg' className='d-block w-100' alt='Expert medical team providing compassionate patient care' />
         <MDBCarouselCaption>
           <h5>Second slide label</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -332,7 +398,7 @@ function Home() {
       </MDBCarouselItem>
 
       <MDBCarouselItem itemId={3}>
-        <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg' className='d-block w-100' alt='...' />
+        <img src='https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg' className='d-block w-100' alt='State-of-the-art medical equipment and healthcare technology' />
         <MDBCarouselCaption>
           <h5>Third slide label</h5>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -372,14 +438,14 @@ function Home() {
                 <p>Esteem spirit temper too say adieus who direct esteem. It esteems luckily picture placing drawing. Apartments frequently or motionless on reasonable projecting expression.</p>
               </div>
               <div className='tab-image-custom' data-aos="fade-left" data-aos-delay="600">
-                <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Tab 1" />
+                <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Business and healthcare management services at Docmed" />
               </div>
             </div>
           </MDBTabsPane>
           <MDBTabsPane open={fillActive === 'tab2'}>
           <div className='tab-content-parent d-flex align-items-center'>
           <div className='tab-image-custom' data-aos="fade-left" data-aos-delay="600">
-                <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Tab 1" />
+                <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Business and healthcare management services at Docmed" />
               </div>
               <div className='tab-icon-custom' data-aos="fade-right" data-aos-delay="300">
                 <h1>Leading edge care for Your family</h1>
@@ -395,7 +461,7 @@ function Home() {
                 <p>Esteem spirit temper too say adieus who direct esteem. It esteems luckily picture placing drawing. Apartments frequently or motionless on reasonable projecting expression.</p>
               </div>
               <div className='tab-image-custom' ata-aos="fade-left" data-aos-delay="600">
-                <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Tab 1" />
+                <img src={"https://preview.colorlib.com/theme/docmed/img/about/business.png.webp"} alt="Business and healthcare management services at Docmed" />
               </div>
             </div>
           </MDBTabsPane>
@@ -414,28 +480,28 @@ function Home() {
       <div className='slider-custom'data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="300">
-        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/1.png"}/>
+        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/1.png"} alt="Dr. Sarah Johnson - Expert Cardiologist at Docmed Medical Center"/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
       <div className='slider-custom' data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="600">
-        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/3.png"}/>
+        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/3.png"} alt="Dr. Michael Chen - Expert Neurologist at Docmed Medical Center"/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
       <div className='slider-custom' data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="900">
-        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/2.png"}/>
+        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/2.png"} alt="Dr. Emily Rodriguez - Expert Ophthalmologist at Docmed Medical Center"/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
       <div className='slider-custom' data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="1300" >
-        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/4.png"}/>
+        <img src={"https://preview.colorlib.com/theme/docmed/img/experts/4.png"} alt="Dr. David Thompson - Expert Dentist at Docmed Medical Center"/>
         <h3>Mirazul Alom</h3>
         <span>Neurologist</span>
       </div>
@@ -446,13 +512,12 @@ function Home() {
       <div className='appointment-section-content'>
 <h5>Get In Touch</h5>
 <h1>Best Medical & Health Care Near Your City</h1>
-<h6>We’ve 25 Years of experience in Medical Services.</h6>
+<h6>We've 25 Years of experience in Medical Services.</h6>
 <button>Book An Appointment</button>
 </div>
     </div>
     </div>
       </div>
-      <Footer />
     </>
   )
 }

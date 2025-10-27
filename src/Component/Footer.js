@@ -1,5 +1,6 @@
 import React from 'react'
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import footerheadimg from "./../Assets/Images/footerheadimg.png";
 function Footer() {
   return (
     <>
@@ -8,10 +9,13 @@ function Footer() {
     <section className='footer-parent-custom'>
       <MDBContainer className='footer-alignment-custom text-center text-md-start mt-5'>
         <MDBRow className='mt-3'>
-          <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
-            <h6 className='fs-4 text-uppercase fw-bold mb-4'>
+          <div className='footer-logo-section d-flex align-items-center gap-1 ps-0 pb-2'>
+            <img src={footerheadimg} alt="Docmed Logo"  width={80} height={80} />
+            <h6 className='fs-4 text-uppercase fw-bold mb-0'>
             DOCMED
             </h6>
+          </div>
+          <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
             <p>
               Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
               consectetur adipisicing elit.

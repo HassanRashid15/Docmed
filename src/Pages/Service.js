@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import Footer from "../Component/Footer.js"
+import Button from 'react-bootstrap/Button';
 import SEO from "../Component/SEO.js";
-import { FaCheck, FaStethoscope, FaHeartbeat, FaEye, FaTooth, FaBrain, FaLungs, FaBaby, FaXRay, FaUserMd, FaAmbulance, FaPills } from "react-icons/fa";
+import { FaCheck, FaStethoscope, FaHeartbeat, FaEye, FaTooth, FaBrain, FaLungs, FaBaby, FaXRay, FaUserMd, FaAmbulance, FaPills, FaPhone, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import { MdHealthAndSafety, MdLocalHospital, MdMedicalServices } from "react-icons/md";
 
 function Service() {
@@ -163,170 +165,160 @@ function Service() {
   return (
     <>
       <SEO
-        title="Medical Services - Comprehensive Healthcare"
-        description="Explore Docmed's comprehensive medical services including cardiology, neurology, ophthalmology, dentistry, emergency care, and more. Expert doctors with advanced technology."
-        keywords="medical services, healthcare services, cardiology, neurology, ophthalmology, dentistry, emergency care, medical procedures, health plans, medical treatment"
+        title="Our Services - Comprehensive Healthcare"
+        description="Learn more about the various services offered by DOCMED and how we provide you with world-class care."
+        keywords="medical services, healthcare services, echocardiograms, pediatric services, women's healthcare, dermatology, laboratory testing, CT scans"
         canonical="/service"
         structuredData={serviceStructuredData}
       />
       <div className='service-page'>
-      {/* Hero Section */}
-      <div className='service-hero-section'>
-        <div className='service-hero-content'>
-          <h1 data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-            Our <span style={{ fontWeight: 700 }}>Medical Services</span>
-          </h1>
-          <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
-            Comprehensive healthcare services delivered with compassion, expertise, and cutting-edge technology.
-          </p>
+        {/* Hero Section */}
+        <div className='service-hero-section'>
+          <Container>
+            <Row className='justify-content-center text-center'>
+              <Col lg={8}>
+                <h1 className='service-main-title'>Our Services</h1>
+                <div className='service-title-underline'></div>
+                <p className='service-subtitle'>
+                  Learn more about the various services offered by Our Clinic and how we provide you with world-class care.
+                </p>
+              </Col>
+            </Row>
+          </Container>
         </div>
-      </div>
 
-      {/* Services Section */}
-      <div className='services-section'>
-        <div className='container'>
-          <div className='section-header text-center' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">
-            <h6>MEDICAL SERVICES</h6>
-            <h2>What We Offer</h2>
-            <p>From routine check-ups to specialized treatments, we provide comprehensive healthcare services to meet all your medical needs.</p>
-          </div>
-          
-          <div className='row'>
-            {medicalServices.map((service, index) => (
-              <div key={index} className='col-lg-3 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay={300 + (index * 200)}>
-                <div className='service-card'>
-                  <div className='service-icon'>
-                    {service.icon}
-                  </div>
-                  <div className='service-content'>
-                    <h4>{service.title}</h4>
-                    <p>{service.description}</p>
-                    <ul className='service-features'>
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex}><FaCheck /> {feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className='service-button'>
-                    <button>Learn More</button>
-                  </div>
+        {/* Services Grid Section */}
+        <div className='services-grid-section'>
+          <Container>
+            <Row className='align-items-center'>
+              {/* Left Column Services */}
+              <Col lg={4} className='services-left-column'>
+                <div className='service-item' data-aos="fade-right" data-aos-delay="200">
+                  <h3>Echocardiograms</h3>
+                  <p>Associates is able to view the beating of the heart and many of its structures</p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+                <div className='service-item' data-aos="fade-right" data-aos-delay="400">
+                  <h3>Pediatric Services</h3>
+                  <p>If you are expecting a child, follow-up care with Our clinic pediatricians can be arranged prior to or after your hospital/birth discharge</p>
+                </div>
+                <div className='service-item' data-aos="fade-right" data-aos-delay="600">
+                  <h3>Women's Healthcare</h3>
+                  <p>Women's health is a field covering the numerous health concerns that women face, from reproductive and sexual health to mammograms</p>
+                </div>
+              </Col>
 
-      {/* Emergency Services Section */}
-      <div className='emergency-services-section'>
-        <div className='container'>
-          <div className='row align-items-center'>
-            <div className='col-lg-6' data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300">
-              <div className='emergency-content'>
-                <h2>24/7 Emergency Care</h2>
-                <p>Our emergency department is staffed with experienced medical professionals and equipped with advanced life-saving technology to provide immediate care when you need it most.</p>
-                <div className='emergency-features'>
-                  <div className='emergency-feature'>
-                    <FaAmbulance />
-                    <div>
-                      <h5>Emergency Ambulance</h5>
-                      <p>Rapid response emergency medical services</p>
-                    </div>
-                  </div>
-                  <div className='emergency-feature'>
-                    <MdLocalHospital />
-                    <div>
-                      <h5>Trauma Center</h5>
-                      <p>Level 1 trauma center with specialized care</p>
-                    </div>
-                  </div>
-                  <div className='emergency-feature'>
-                    <FaUserMd />
-                    <div>
-                      <h5>Expert Staff</h5>
-                      <p>Board-certified emergency physicians</p>
-                    </div>
-                  </div>
+              {/* Center Doctor Image */}
+              <Col lg={4} className='text-center'>
+                <div className='doctor-image-container' data-aos="zoom-in" data-aos-delay="300">
+                  <img 
+                    src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    alt="Professional Doctor" 
+                    className='doctor-image'
+                  />
                 </div>
-                <div className='emergency-contact'>
-                  <h4>Emergency Hotline: <span>+1 (555) 123-4567</span></h4>
-                </div>
-              </div>
-            </div>
-            <div className='col-lg-6' data-aos="fade-left" data-aos-duration="1100" data-aos-delay="600">
-              <div className='emergency-image'>
-                <img src="https://preview.colorlib.com/theme/docmed/img/about/business.png.webp" alt="Emergency Services" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Health Plans Section */}
-      <div className='health-plans-section'>
-        <div className='container'>
-          <div className='section-header text-center' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">
-            <h6>HEALTH PLANS</h6>
-            <h2>Choose Your Health Plan</h2>
-            <p>Select the health plan that best fits your needs and budget. All plans include access to our expert medical team.</p>
-          </div>
-          <div className='pricing-table'>
-            {pricingPlans.map((plan) => (
-              <div className={`pricing-card ${selectedPlan === plan.id ? 'selected' : ''}`} key={plan.id} onClick={() => handleSelectPlan(plan.id)} data-aos="fade-up" data-aos-duration="1100" data-aos-delay={300 + (parseInt(plan.id === 'basic' ? 0 : plan.id === 'standard' ? 1 : plan.id === 'premium' ? 2 : 3) * 200)}>
-                <h3 className="pricing-card-header">{plan.title}</h3>
-                <div className="price"><sup>$</sup>{plan.price}<span>/month</span></div>
-                <ul>
-                  {plan.features.map((feature, index) => (
-                    <li key={index}><FaCheck />{feature}</li>
-                  ))}
-                </ul>
-                <button className="order-btn">Choose Plan</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+              </Col>
 
-      {/* Additional Services Section */}
-      <div className='additional-services-section'>
-        <div className='container'>
-          <div className='section-header text-center' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">
-            <h6>ADDITIONAL SERVICES</h6>
-            <h2>Specialized Care</h2>
-            <p>Beyond our core services, we offer specialized treatments and programs to address unique healthcare needs.</p>
-          </div>
-          <div className='row'>
-            <div className='col-lg-4 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">
-              <div className='additional-service-card'>
-                <div className='service-icon'>
-                  <FaPills />
+              {/* Right Column Services */}
+              <Col lg={4} className='services-right-column'>
+                <div className='service-item' data-aos="fade-left" data-aos-delay="200">
+                  <h3>Dermatology</h3>
+                  <p>Our providers are trained to handle a spectrum of skin conditions, covering the majority of your dermatology</p>
                 </div>
-                <h4>Pharmacy Services</h4>
-                <p>Full-service pharmacy with prescription medications, over-the-counter products, and medication counseling.</p>
-              </div>
-            </div>
-            <div className='col-lg-4 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="500">
-              <div className='additional-service-card'>
-                <div className='service-icon'>
-                  <MdHealthAndSafety />
+                <div className='service-item' data-aos="fade-left" data-aos-delay="400">
+                  <h3>Laboratory Testing</h3>
+                  <p>Laboratory orders are created within the patient's electronic medical record (EHR) and transmitted to our laboratory. Once the sample is obtained</p>
                 </div>
-                <h4>Wellness Programs</h4>
-                <p>Comprehensive wellness programs including nutrition counseling, fitness assessments, and preventive health education.</p>
-              </div>
-            </div>
-            <div className='col-lg-4 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="700">
-              <div className='additional-service-card'>
-                <div className='service-icon'>
-                  <MdMedicalServices />
+                <div className='service-item' data-aos="fade-left" data-aos-delay="600">
+                  <h3>CT Scans</h3>
+                  <p>A CT scan (computed tomography) scan is a non-invasive procedure that allows providers to view 3D images taken from a series of 2D X-ray images</p>
                 </div>
-                <h4>Telemedicine</h4>
-                <p>Virtual consultations with our medical professionals for convenient access to healthcare from anywhere.</p>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+
+        {/* Additional Services Section */}
+        <div className='additional-services-section'>
+          <Container>
+            <Row className='text-center mb-5'>
+              <Col>
+                <h2 className='section-title'>Additional Services</h2>
+                <p className='section-subtitle'>Comprehensive healthcare solutions for all your medical needs</p>
+              </Col>
+            </Row>
+            <Row className='g-4'>
+              <Col lg={3} md={6}>
+                <Card className='h-100 border-0 shadow-sm text-center p-4'>
+                  <Card.Body>
+                    <FaStethoscope className='text-primary mb-3' style={{fontSize: '3rem'}} />
+                    <h5 className='fw-bold text-dark mb-3'>General Medicine</h5>
+                    <p className='text-muted'>
+                      Comprehensive primary healthcare services including routine check-ups and preventive care.
+                    </p>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col lg={3} md={6}>
+                <Card className='h-100 border-0 shadow-sm text-center p-4'>
+                  <Card.Body>
+                    <FaHeartbeat className='text-primary mb-3' style={{fontSize: '3rem'}} />
+                    <h5 className='fw-bold text-dark mb-3'>Cardiology</h5>
+                    <p className='text-muted'>
+                      Advanced heart and cardiovascular care with state-of-the-art diagnostic facilities.
+                    </p>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col lg={3} md={6}>
+                <Card className='h-100 border-0 shadow-sm text-center p-4'>
+                  <Card.Body>
+                    <FaEye className='text-primary mb-3' style={{fontSize: '3rem'}} />
+                    <h5 className='fw-bold text-dark mb-3'>Ophthalmology</h5>
+                    <p className='text-muted'>
+                      Complete eye care services from routine vision exams to advanced surgical procedures.
+                    </p>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col lg={3} md={6}>
+                <Card className='h-100 border-0 shadow-sm text-center p-4'>
+                  <Card.Body>
+                    <FaTooth className='text-primary mb-3' style={{fontSize: '3rem'}} />
+                    <h5 className='fw-bold text-dark mb-3'>Dentistry</h5>
+                    <p className='text-muted'>
+                      Comprehensive dental care including preventive, restorative, and cosmetic services.
+                    </p>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+
+        {/* Emergency Services CTA */}
+        <div className='emergency-cta-section bg-primary text-white'>
+          <Container>
+            <Row className='text-center'>
+              <Col>
+                <h2 className='display-5 fw-bold mb-4'>Need Emergency Care?</h2>
+                <p className='lead mb-4'>
+                  Our emergency department is staffed 24/7 with experienced medical professionals.
+                </p>
+                <div className='d-flex justify-content-center gap-3 flex-wrap'>
+                  <Button variant="light" size="lg" className='px-4 py-3'>
+                    <FaPhone className='me-2' />
+                    Call Emergency: (555) 123-4567
+                  </Button>
+                  <Button variant="outline-light" size="lg" className='px-4 py-3'>
+                    <FaMapMarkerAlt className='me-2' />
+                    Find Our Location
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
         </div>
       </div>
-      <Footer />
-    </div>
     </>
   )
 }
