@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SEO from "../Component/SEO.js";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 function Contact() {
+  useEffect(() => {
+    document.title = "Contact DOCMED | Medical Center - Get In Touch Today";
+  }, []);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -175,9 +179,9 @@ function Contact() {
   return (
     <>
       <SEO
-        title="Contact Us - Get In Touch"
-        description="Contact Docmed Medical Center for appointments, inquiries, or emergency care. We're here to help you 24/7. Call us at +1 (555) 123-4567 or visit our location."
-        keywords="contact docmed, medical center contact, hospital phone number, emergency contact, appointment booking, medical inquiries, healthcare contact"
+        title={`Contact DOCMED | Medical Center - Get In Touch Today`}
+        description="Contact DOCMED Medical Center for appointments, inquiries, or emergency care. We're here to help you 24/7. Call us at +1 (555) 123-4567 or visit our location."
+        keywords="contact docmed, medical center contact, hospital phone number, emergency contact, appointment booking, medical inquiries, healthcare contact, doctor consultation"
         canonical="/contact"
         structuredData={contactStructuredData}
       />

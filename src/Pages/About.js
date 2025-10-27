@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import SEO from "../Component/SEO.js";
 import { FaUserMd, FaHeartbeat, FaAward, FaUsers, FaStethoscope, FaHospital } from 'react-icons/fa';
 
 function About() {
+  useEffect(() => {
+    document.title = "About DOCMED | Medical Center - Your Trusted Healthcare Partner";
+  }, []);
+
   return (
-    <div className="about-page">
+    <>
+      <SEO
+        title={`About DOCMED | Medical Center - Your Trusted Healthcare Partner`}
+        description="Learn about DOCMED Medical Center - your trusted healthcare partner with 15+ years of experience, 150+ expert doctors, and 50K+ happy patients. Discover our mission, team, and values."
+        keywords="about docmed, medical center about, healthcare team, medical professionals, hospital mission, medical values, healthcare experience, doctor team, medical center history"
+        canonical="/about"
+      />
+      <div className="about-page">
       {/* Hero Banner Section */}
       <div className="about-hero-banner">
         <div className="banner-image">
@@ -255,6 +267,7 @@ function About() {
         </Container>
       </section>
     </div>
+    </>
   );
 }
 

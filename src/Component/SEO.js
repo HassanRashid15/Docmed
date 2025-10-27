@@ -21,14 +21,14 @@ const SEO = ({
   const siteUrl = 'https://docmed.com'; // Replace with your actual domain
   const defaultImage = `${siteUrl}/images/docmed-og-image.jpg`; // Replace with your actual OG image
   
-  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  const fullTitle = title || siteName;
   const fullDescription = description || 'Docmed Medical Center - Your trusted healthcare partner providing exceptional medical care with compassion and excellence. Expert doctors, advanced technology, and 24/7 emergency services.';
   const fullKeywords = keywords || 'medical center, healthcare, hospital, doctors, emergency care, cardiology, neurology, ophthalmology, dentistry, medical services, patient care, healthcare provider';
   const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
   const fullOgImage = ogImage || defaultImage;
 
   return (
-    <Helmet>
+    <Helmet key={title}>
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={fullDescription} />
