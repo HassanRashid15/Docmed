@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import Footer from "../Component/Footer.js";
 import SEO from "../Component/SEO.js";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaUserMd, FaAmbulance } from "react-icons/fa";
-import { MdEmail, MdPhone, MdLocationOn, MdAccessTime } from "react-icons/md";
-import userfeed from "./../Assets/Images/userfeed.jpg";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    subject: '',
-    message: '',
-    appointmentType: 'general'
+    message: ''
   });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,13 +20,112 @@ function Contact() {
       ...prev,
       [name]: value
     }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // First Name validation
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First Name is required';
+    }
+    
+    // Last Name validation
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last Name is required';
+    }
+    
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    // Phone validation
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone Number is required';
+    } else {
+      // Remove all non-digit characters except + at the beginning
+      const cleanPhone = formData.phone.replace(/[^\d\+]/g, '');
+      // Accept phone numbers with 7-15 digits, optionally starting with +
+      if (cleanPhone.length < 7 || cleanPhone.length > 15) {
+        newErrors.phone = 'Please enter a valid phone number (7-15 digits)';
+      } else if (!/^\+?[0-9]+$/.test(cleanPhone)) {
+        newErrors.phone = 'Please enter a valid phone number';
+      }
+    }
+    
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    
+    // Validate form first
+    if (!validateForm()) {
+      console.log('❌ Form validation failed:', errors);
+      return;
+    }
+    
+    // Start loading
+    setIsLoading(true);
+    console.log('🔄 Form submission started...');
+    
+    try {
+      // Simulate API call delay (2 seconds)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Show form data in console
+      console.log('=== CONTACT FORM SUBMITTED ===');
+      console.log('Form Data:', formData);
+      console.log('First Name:', formData.firstName);
+      console.log('Last Name:', formData.lastName);
+      console.log('Email:', formData.email);
+      console.log('Phone:', formData.phone);
+      console.log('Message:', formData.message);
+      console.log('Submission Time:', new Date().toLocaleString());
+      console.log('================================');
+      
+      // Show success message
     alert('Thank you for your message. We will get back to you soon!');
+      
+      // Reset form after submission
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+      
+      // Clear errors
+      setErrors({});
+      
+    } catch (error) {
+      console.error('❌ Form submission error:', error);
+      alert('Sorry, there was an error sending your message. Please try again.');
+    } finally {
+      // Stop loading
+      setIsLoading(false);
+      console.log('✅ Form submission completed');
+    }
   };
 
   const contactStructuredData = {
@@ -84,237 +182,135 @@ function Contact() {
         structuredData={contactStructuredData}
       />
       <div className='contact-page'>
-        {/* Hero Section */}
-        <div className='contact-hero-section'>
-          <div className='contact-hero-content'>
-            <h1 data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">
-              Contact <span style={{ fontWeight: 700 }}>Docmed</span>
-            </h1>
-            <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
-              Get in touch with us for appointments, inquiries, or emergency care. We're here to help you 24/7.
-            </p>
+        {/* Header Banner with Image and Heart Overlay */}
+        <div className='contact-header-banner'>
+          <div className='banner-image'>
+            <div className='heart-overlay'></div>
+          </div>
+          <div className='banner-title'>
+            <h1>Contact Us</h1>
           </div>
         </div>
 
-        {/* Contact Information Section */}
-        <div className='contact-info-section'>
-          <div className='container'>
-            <div className='row'>
-              <div className='col-lg-4 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">
-                <div className='contact-info-card'>
-                  <div className='contact-icon'>
-                    <FaPhone />
-                  </div>
-                  <h4>Phone Numbers</h4>
-                  <p>Main: <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
-                  <p>Emergency: <a href="tel:+15551234568">+1 (555) 123-4568</a></p>
-                  <p>Appointments: <a href="tel:+15551234569">+1 (555) 123-4569</a></p>
-                </div>
-              </div>
-              <div className='col-lg-4 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="500">
-                <div className='contact-info-card'>
-                  <div className='contact-icon'>
-                    <FaEnvelope />
-                  </div>
-                  <h4>Email Address</h4>
-                  <p>General: <a href="mailto:info@docmed.com">info@docmed.com</a></p>
-                  <p>Appointments: <a href="mailto:appointments@docmed.com">appointments@docmed.com</a></p>
-                  <p>Emergency: <a href="mailto:emergency@docmed.com">emergency@docmed.com</a></p>
-                </div>
-              </div>
-              <div className='col-lg-4 col-md-6 mb-4' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="700">
-                <div className='contact-info-card'>
-                  <div className='contact-icon'>
-                    <FaMapMarkerAlt />
-                  </div>
-                  <h4>Location</h4>
-                  <p>123 Medical Center Drive</p>
-                  <p>Healthcare District</p>
-                  <p>New York, NY 10001</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Form Section */}
-        <div className='contact-form-section'>
+        {/* Main Content Section */}
+        <div className='contact-main-content'>
           <div className='container'>
             <div className='row align-items-center'>
-              <div className='col-lg-6' data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300">
-                <div className='contact-form-content'>
-                  <h2>Get In Touch</h2>
-                  <p>We're here to help with all your healthcare needs. Send us a message and we'll respond as soon as possible.</p>
+              {/* Left Column - Contact Information */}
+              <div className='col-lg-6'>
+                <div className='contact-info-section'>
+                  <h2>Let's talk with us</h2>
+                  <p>Questions, comments, or suggestions? Simply fill in the form and we'll be in touch shortly.</p>
                   
+                  <div className='contact-details'>
+                    <div className='contact-item'>
+                      <FaMapMarkerAlt className='contact-icon' />
+                      <span>1055 Arthur ave Elk Groot, 67. New Palmas South Carolina.</span>
+                  </div>
+                    <div className='contact-item'>
+                      <FaPhone className='contact-icon' />
+                      <span>+1 234 678 9108 99</span>
+                </div>
+                    <div className='contact-item'>
+                      <FaEnvelope className='contact-icon' />
+                      <span>Contact@docmed.com</span>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column - Contact Form */}
+              <div className='col-lg-6'>
+                <div className='contact-form-container'>
                   <form onSubmit={handleSubmit} className='contact-form'>
                     <div className='form-row'>
                       <div className='form-group'>
+                        <label htmlFor="firstName">First Name *</label>
                         <input 
                           type="text" 
-                          name="name" 
-                          placeholder="Your Name" 
-                          value={formData.name}
+                          id="firstName"
+                          name="firstName" 
+                          placeholder="John"
+                          value={formData.firstName}
                           onChange={handleInputChange}
-                          required 
+                          className={errors.firstName ? 'error' : ''}
                         />
+                        {errors.firstName && <span className="error-message">{errors.firstName}</span>}
                       </div>
                       <div className='form-group'>
+                        <label htmlFor="lastName">Last Name *</label>
                         <input 
-                          type="email" 
-                          name="email" 
-                          placeholder="Your Email" 
-                          value={formData.email}
+                          type="text" 
+                          id="lastName"
+                          name="lastName" 
+                          placeholder="Last Name"
+                          value={formData.lastName}
                           onChange={handleInputChange}
-                          required 
+                          className={errors.lastName ? 'error' : ''}
                         />
+                        {errors.lastName && <span className="error-message">{errors.lastName}</span>}
                       </div>
                     </div>
                     
-                    <div className='form-row'>
                       <div className='form-group'>
+                      <label htmlFor="email">Email *</label>
                         <input 
-                          type="tel" 
-                          name="phone" 
-                          placeholder="Your Phone" 
-                          value={formData.phone}
+                        type="text" 
+                        id="email"
+                        name="email" 
+                        placeholder="Email"
+                        value={formData.email}
                           onChange={handleInputChange}
-                        />
-                      </div>
-                      <div className='form-group'>
-                        <select 
-                          name="appointmentType" 
-                          value={formData.appointmentType}
-                          onChange={handleInputChange}
-                        >
-                          <option value="general">General Inquiry</option>
-                          <option value="appointment">Book Appointment</option>
-                          <option value="emergency">Emergency</option>
-                          <option value="billing">Billing Question</option>
-                          <option value="feedback">Feedback</option>
-                        </select>
-                      </div>
+                        className={errors.email ? 'error' : ''}
+                      />
+                      {errors.email && <span className="error-message">{errors.email}</span>}
                     </div>
                     
                     <div className='form-group'>
+                      <label htmlFor="phone">Phone Number *</label>
                       <input 
                         type="text" 
-                        name="subject" 
-                        placeholder="Subject" 
-                        value={formData.subject}
+                        id="phone"
+                        name="phone" 
+                        placeholder="Phone Number"
+                        value={formData.phone}
                         onChange={handleInputChange}
-                        required 
+                        className={errors.phone ? 'error' : ''}
                       />
+                      {errors.phone && <span className="error-message">{errors.phone}</span>}
                     </div>
                     
                     <div className='form-group'>
+                      <label htmlFor="message">Your Message *</label>
                       <textarea 
+                        id="message"
                         name="message" 
-                        placeholder="Your Message" 
-                        rows="5"
+                        placeholder="Your message..."
+                        rows="4"
                         value={formData.message}
                         onChange={handleInputChange}
-                        required
+                        className={errors.message ? 'error' : ''}
                       ></textarea>
+                      {errors.message && <span className="error-message">{errors.message}</span>}
                     </div>
                     
-                    <button type="submit" className='submit-btn'>Send Message</button>
+                    <button type="submit" className='send-message-btn' disabled={isLoading}>
+                      {isLoading ? (
+                        <>
+                          <span className="loader"></span>
+                          Sending...
+                        </>
+                      ) : (
+                        'Send Message'
+                      )}
+                    </button>
                   </form>
-                </div>
-              </div>
-              
-              <div className='col-lg-6' data-aos="fade-left" data-aos-duration="1100" data-aos-delay="600">
-                <div className='contact-image'>
-                  <img src={userfeed} alt="Contact Us" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Hospital Hours Section */}
-        <div className='hospital-hours-section'>
-          <div className='container'>
-            <div className='row'>
-              <div className='col-lg-6' data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300">
-                <div className='hours-content'>
-                  <h2>Hospital Hours</h2>
-                  <div className='hours-list'>
-                    <div className='hours-item'>
-                      <span className='day'>Monday - Friday</span>
-                      <span className='time'>8:00 AM - 8:00 PM</span>
-                    </div>
-                    <div className='hours-item'>
-                      <span className='day'>Saturday</span>
-                      <span className='time'>9:00 AM - 5:00 PM</span>
-                    </div>
-                    <div className='hours-item'>
-                      <span className='day'>Sunday</span>
-                      <span className='time'>10:00 AM - 4:00 PM</span>
-                    </div>
-                    <div className='hours-item emergency'>
-                      <span className='day'>Emergency Department</span>
-                      <span className='time'>24/7</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className='col-lg-6' data-aos="fade-left" data-aos-duration="1100" data-aos-delay="600">
-                <div className='emergency-info'>
-                  <h2>Emergency Information</h2>
-                  <div className='emergency-card'>
-                    <div className='emergency-icon'>
-                      <FaAmbulance />
-                    </div>
-                    <div className='emergency-content'>
-                      <h4>Emergency Hotline</h4>
-                      <p className='emergency-number'>+1 (555) 123-4568</p>
-                      <p>Available 24/7 for medical emergencies</p>
-                    </div>
-                  </div>
-                  
-                  <div className='emergency-features'>
-                    <div className='emergency-feature'>
-                      <FaUserMd />
-                      <span>Board-certified emergency physicians</span>
-                    </div>
-                    <div className='emergency-feature'>
-                      <FaAmbulance />
-                      <span>Rapid response ambulance service</span>
-                    </div>
-                    <div className='emergency-feature'>
-                      <FaClock />
-                      <span>Average wait time: 15 minutes</span>
-                    </div>
-                  </div>
-      </div>
-</div>
-</div>
-</div>
-  </div>
-
-        {/* Map Section */}
-        <div className='map-section'>
-          <div className='container'>
-            <div className='section-header text-center' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">
-              <h2>Find Us</h2>
-              <p>Located in the heart of the medical district with easy access and parking facilities.</p>
-            </div>
-            <div className='map-container' data-aos="fade-up" data-aos-duration="1100" data-aos-delay="500">
-              <div className='map-placeholder'>
-                <div className='map-content'>
-                  <MdLocationOn className='map-icon' />
-                  <h4>Docmed Medical Center</h4>
-                  <p>123 Medical Center Drive, Healthcare District</p>
-                  <p>New York, NY 10001</p>
-                  <button className='directions-btn'>Get Directions</button>
                 </div>
 </div>
 </div>
 </div>
       </div>
     </div>
-      <Footer />
     </>
   )
 }

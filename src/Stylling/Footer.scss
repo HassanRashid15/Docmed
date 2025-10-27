@@ -10,7 +10,7 @@
     background-color: #009DFF;
 }
 .footer-parent-custom{
-    padding: 45px;
+    padding: 40px;
 }
 .footer-parent-custom p{
     color:whitesmoke;
@@ -34,4 +34,36 @@ margin: auto;
 }
 .footer-alignment-custom{
     max-width: 100% !important;
+}
+
+/* Left align footer content from 767px */
+@media (max-width: 767px) {
+    .footer-alignment-custom {
+        text-align: left !important;
+    }
+    
+    .footer-alignment-custom .text-center {
+        text-align: left !important;
+    }
+    
+    .footer-alignment-custom .text-md-start {
+        text-align: left !important;
+    }
+    
+    /* Ensure all footer columns are left-aligned */
+    .footer-alignment-custom .col,
+    .footer-alignment-custom [class*="col-"] {
+        text-align: left !important;
+    }
+    
+    /* Left align the social section */
+    .connected-section-custom {
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+    
+    .connected-section-custom .me-5 {
+        margin-right: 0 !important;
+        margin-bottom: 1rem;
+    }
 }

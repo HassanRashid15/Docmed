@@ -13,9 +13,14 @@ Disallow: /private/
 Disallow: /api/
 
 # Allow important pages
-Allow: /
 Allow: /about
 Allow: /service
 Allow: /contact
-Allow: /work
-Allow: /experience
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Block common bot traps
+Disallow: /*.json$
+Disallow: /*?*
+Disallow: /*#*

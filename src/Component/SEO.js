@@ -9,7 +9,13 @@ const SEO = ({
   ogImage, 
   ogType = 'website',
   twitterCard = 'summary_large_image',
-  structuredData
+  structuredData,
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  author = 'Docmed Medical Center',
+  section = 'Healthcare',
+  tags = []
 }) => {
   const siteName = 'Docmed Medical Center';
   const siteUrl = 'https://docmed.com'; // Replace with your actual domain
@@ -27,10 +33,26 @@ const SEO = ({
       <title>{fullTitle}</title>
       <meta name="description" content={fullDescription} />
       <meta name="keywords" content={fullKeywords} />
-      <meta name="author" content="Docmed Medical Center" />
-      <meta name="robots" content="index, follow" />
+      <meta name="author" content={author} />
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="theme-color" content="#0066cc" />
+      <meta name="theme-color" content="#0181f5" />
+      <meta name="msapplication-TileColor" content="#0181f5" />
+      <meta name="msapplication-config" content="/browserconfig.xml" />
+      
+      {/* Additional SEO Meta Tags */}
+      <meta name="language" content="English" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="rating" content="General" />
+      <meta name="distribution" content="Global" />
+      <meta name="geo.region" content="US" />
+      <meta name="geo.placename" content="United States" />
+      <meta name="classification" content="Healthcare, Medical Services" />
+      <meta name="category" content="Healthcare" />
+      <meta name="coverage" content="Worldwide" />
+      <meta name="target" content="all" />
+      <meta name="HandheldFriendly" content="True" />
+      <meta name="MobileOptimized" content="320" />
       
       {/* Canonical URL */}
       <link rel="canonical" href={fullCanonical} />
@@ -39,10 +61,20 @@ const SEO = ({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={fullDescription} />
       <meta property="og:image" content={fullOgImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={title || siteName} />
       <meta property="og:url" content={fullCanonical} />
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content="en_US" />
+      {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+      {author && <meta property="article:author" content={author} />}
+      {section && <meta property="article:section" content={section} />}
+      {tags.map((tag, index) => (
+        <meta key={index} property="article:tag" content={tag} />
+      ))}
       
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content={twitterCard} />
@@ -72,6 +104,65 @@ const SEO = ({
           {JSON.stringify(structuredData)}
         </script>
       )}
+      
+      {/* Default Organization Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "MedicalOrganization",
+          "name": "Docmed Medical Center",
+          "alternateName": "Docmed",
+          "url": siteUrl,
+          "logo": `${siteUrl}/images/logo.png`,
+          "description": "Leading healthcare provider offering comprehensive medical services including emergency care, cardiology, neurology, ophthalmology, and more.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1055 Arthur ave Elk Groot, 67",
+            "addressLocality": "New Palmas",
+            "addressRegion": "South Carolina",
+            "postalCode": "29150",
+            "addressCountry": "US"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-234-678-9108-99",
+            "contactType": "customer service",
+            "availableLanguage": "English"
+          },
+          "sameAs": [
+            "https://www.facebook.com/docmed",
+            "https://www.twitter.com/docmed",
+            "https://www.linkedin.com/company/docmed"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Medical Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Emergency Care"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Cardiology"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Neurology"
+                }
+              }
+            ]
+          }
+        })}
+      </script>
     </Helmet>
   );
 };

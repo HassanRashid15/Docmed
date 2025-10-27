@@ -11,11 +11,23 @@
     top: 0;
   }
 .navbar-middle-custom{
-    justify-content: end ;
+    justify-content: center ;
     width: 100% ;
 }
 .navbar-page{
     padding: 0 !important;
+}
+
+.navbar-logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.navbar-logo {
+    height: 40px;
+    width: auto;
 }
 .navbar-middle-custom{
 margin: 0;
@@ -25,7 +37,7 @@ margin: 0;
 }
 .navbar-button-custom button{
     background: #009DFF;
-    padding: 12px 26px;
+    padding: 8 px 30px;
     font-size: 14px;
     font-weight: 400;
     border: 1px solid transparent;
@@ -66,7 +78,7 @@ margin: 0;
     }
 }
 .navbar-middle-custom{
-    justify-content: flex-end;
+    justify-content: center;
     gap: 15px;
 }
 
@@ -74,21 +86,29 @@ margin: 0;
     width: 39%;
 }
 .navbar-middle-custom{
-    justify-content: end;
+    justify-content: center;
 }
 @media (min-width:992px) and (max-width:1024px){
     .navbar-alignment-custom{
         justify-content: end;
     }
+    .navbar-logo-section {
+        justify-content: center;
+        flex: 1;
+    }
 }
 
 @media (min-width:992px){
     .navbar-middle-custom{
-        justify-content: flex-end;
+        justify-content: center;
         margin: 0;
     }
     .navbar-alignment-custom{
         margin: 0;
+    }
+    .navbar-logo-section {
+        justify-content: center;
+        flex: 1;
     }
 }
 .navbar-parent{
@@ -106,6 +126,21 @@ margin: 0;
     .navbar-toggler{
 border: none !important;
 color: #009DFF !important;
+    }
+    
+    /* Mobile controls positioning */
+    .navbar-mobile-controls {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .navbar-appointment-mobile {
+        margin-right: 0;
+    }
+    
+    .navbar-toggler {
+        margin-left: 0;
     }
 }
 
@@ -148,3 +183,50 @@ color: #009DFF !important;
     width: 50px;
 }
 
+/* Mobile controls wrapper */
+.navbar-mobile-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Mobile appointment button styling */
+.navbar-appointment-mobile {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-appointment-mobile .navbar-button-custom button {
+    background: #009DFF;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    border: 1px solid transparent;
+    color: #ffff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+}
+
+.navbar-appointment-mobile .navbar-button-custom button:hover {
+    background: #fff !important;
+    color: #009DFF !important;
+    border: 1px solid #009DFF !important;
+}
+
+.navbar-appointment-mobile .appointment-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.navbar-parent {
+    background-color: rgba(255, 255, 255, 0.8) !important; /* transparent white */
+    backdrop-filter: blur(10px) !important; /* frosted glass effect */
+    -webkit-backdrop-filter: blur(10px) !important; /* for Safari support */
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease !important;
+  }
+  
