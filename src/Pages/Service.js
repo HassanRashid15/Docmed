@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +9,10 @@ import { FaCheck, FaStethoscope, FaHeartbeat, FaEye, FaTooth, FaBrain, FaLungs, 
 import { MdHealthAndSafety, MdLocalHospital, MdMedicalServices } from "react-icons/md";
 
 function Service() {
+  useEffect(() => {
+    document.title = "Medical Services | DOCMED - Comprehensive Healthcare Solutions";
+  }, []);
+
   const [selectedPlan, setSelectedPlan] = useState(null);
 
   const handleSelectPlan = (planId) => {
@@ -165,15 +169,15 @@ function Service() {
   return (
     <>
       <SEO
-        title="Our Services - Comprehensive Healthcare"
-        description="Learn more about the various services offered by DOCMED and how we provide you with world-class care."
-        keywords="medical services, healthcare services, echocardiograms, pediatric services, women's healthcare, dermatology, laboratory testing, CT scans"
+        title={`Medical Services | DOCMED - Comprehensive Healthcare Solutions`}
+        description="Discover DOCMED's comprehensive medical services including cardiology, dermatology, pediatric care, laboratory testing, CT scans, and more. Expert doctors with world-class care."
+        keywords="medical services, healthcare services, echocardiograms, pediatric services, women's healthcare, dermatology, laboratory testing, CT scans, cardiology, neurology, ophthalmology"
         canonical="/service"
         structuredData={serviceStructuredData}
       />
       <div className='service-page'>
-        {/* Hero Section */}
-        <div className='service-hero-section'>
+      {/* Hero Section */}
+      <div className='service-hero-section'>
           <Container>
             <Row className='justify-content-center text-center'>
               <Col lg={8}>
@@ -185,8 +189,8 @@ function Service() {
               </Col>
             </Row>
           </Container>
-        </div>
-
+          </div>
+          
         {/* Services Grid Section */}
         <div className='services-grid-section'>
           <Container>
@@ -196,15 +200,15 @@ function Service() {
                 <div className='service-item' data-aos="fade-right" data-aos-delay="200">
                   <h3>Echocardiograms</h3>
                   <p>Associates is able to view the beating of the heart and many of its structures</p>
-                </div>
+                  </div>
                 <div className='service-item' data-aos="fade-right" data-aos-delay="400">
                   <h3>Pediatric Services</h3>
                   <p>If you are expecting a child, follow-up care with Our clinic pediatricians can be arranged prior to or after your hospital/birth discharge</p>
-                </div>
+                  </div>
                 <div className='service-item' data-aos="fade-right" data-aos-delay="600">
                   <h3>Women's Healthcare</h3>
                   <p>Women's health is a field covering the numerous health concerns that women face, from reproductive and sexual health to mammograms</p>
-                </div>
+                  </div>
               </Col>
 
               {/* Center Doctor Image */}
@@ -223,7 +227,7 @@ function Service() {
                 <div className='service-item' data-aos="fade-left" data-aos-delay="200">
                   <h3>Dermatology</h3>
                   <p>Our providers are trained to handle a spectrum of skin conditions, covering the majority of your dermatology</p>
-                </div>
+                    </div>
                 <div className='service-item' data-aos="fade-left" data-aos-delay="400">
                   <h3>Laboratory Testing</h3>
                   <p>Laboratory orders are created within the patient's electronic medical record (EHR) and transmitted to our laboratory. Once the sample is obtained</p>
@@ -235,10 +239,10 @@ function Service() {
               </Col>
             </Row>
           </Container>
-        </div>
+      </div>
 
-        {/* Additional Services Section */}
-        <div className='additional-services-section'>
+      {/* Additional Services Section */}
+      <div className='additional-services-section'>
           <Container>
             <Row className='text-center mb-5'>
               <Col>
@@ -293,7 +297,7 @@ function Service() {
               </Col>
             </Row>
           </Container>
-        </div>
+          </div>
 
         {/* Emergency Services CTA */}
         <div className='emergency-cta-section bg-primary text-white'>
@@ -318,7 +322,7 @@ function Service() {
             </Row>
           </Container>
         </div>
-      </div>
+    </div>
     </>
   )
 }

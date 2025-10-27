@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SEO from "./../Component/SEO.js";
 import { LuStethoscope } from "react-icons/lu";
 import { IoMdNutrition } from "react-icons/io";
@@ -19,6 +19,10 @@ import {
 } from 'mdb-react-ui-kit';
 import { FaRegCheckCircle } from "react-icons/fa";
 function Home({ navbarVisible }) {
+  useEffect(() => {
+    document.title = "DOCMED - Premier Medical Center | Expert Healthcare Services";
+  }, []);
+
   const [fillActive, setFillActive] = useState('tab1');
 
   const handleFillClick = (value) => {
@@ -164,8 +168,8 @@ function Home({ navbarVisible }) {
   return (
     <>
       <SEO
-        title="Home - Premier Healthcare Services"
-        description="Docmed Medical Center provides exceptional healthcare services with expert doctors, advanced technology, and 24/7 emergency care. Your trusted healthcare partner for over 25 years."
+        title={`DOCMED - Premier Medical Center | Expert Healthcare Services`}
+        description="DOCMED Medical Center provides exceptional healthcare services with expert doctors, advanced technology, and 24/7 emergency care. Your trusted healthcare partner for over 25 years."
         keywords="medical center, healthcare, hospital, emergency care, cardiology, neurology, ophthalmology, dentistry, medical services, patient care, healthcare provider, doctor appointments"
         canonical="/"
         structuredData={homeStructuredData}
