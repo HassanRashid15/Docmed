@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import SEO from "./../Component/SEO.js";
 import { LuStethoscope } from "react-icons/lu";
 import { IoMdNutrition } from "react-icons/io";
-import { ReactTicker } from "@guna81/react-ticker";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,6 +37,7 @@ function Home({ navbarVisible }) {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
+    gap: 10,
     slidesToScroll: 1,
     responsive: [
       {
@@ -188,22 +188,9 @@ function Home({ navbarVisible }) {
         </div>
         
         {/* Medical Services Ticker */}
-        <div className='ticker-wrap'>
-          <div className='ticker'>
-            <span className='item-collection-1'>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-            </span>
-            <span className='item-collection-2'>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-              <span className='item'>Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-            </span>
-          </div>
-        </div>
+        <figure className="marquee marquee--navy" data-text="Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today">
+          <span className="sr-only">Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
+        </figure>
         <div className='welcome-section d-flex'>
           <div className='welcome-section-image-custom'>
             <img src={docpic} alt="Professional doctor providing healthcare services at Docmed Medical Center" />

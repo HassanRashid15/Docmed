@@ -181,7 +181,7 @@ function Service() {
           <Container>
             <Row className='justify-content-center text-center'>
               <Col lg={8}>
-                <h1 className='service-main-title'>Our Services</h1>
+                <h1 className='service-main-title'>Our <span className='our-mission-title'>Services</span></h1>
                 <div className='service-title-underline'></div>
                 <p className='service-subtitle'>
                   Learn more about the various services offered by Our Clinic and how we provide you with world-class care.
@@ -212,12 +212,12 @@ function Service() {
               </Col>
 
               {/* Center Doctor Image */}
-              <Col lg={4} className='text-center'>
-                <div className='doctor-image-container' data-aos="zoom-in" data-aos-delay="300">
+              <Col lg={4} className='text-center d-flex align-items-stretch p-0'>
+                <div className='doctor-image-container w-100 h-100' data-aos="zoom-in" data-aos-delay="300">
                   <img 
                     src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                     alt="Professional Doctor" 
-                    className='doctor-image'
+                    className='doctor-image w-100 h-100'
                   />
                 </div>
               </Col>
@@ -246,7 +246,7 @@ function Service() {
           <Container>
             <Row className='text-center mb-5'>
               <Col>
-                <h2 className='section-title'>Additional Services</h2>
+                <h2 className='section-title'>Additional <span className='our-mission-title'>Services</span></h2>
                 <p className='section-subtitle'>Comprehensive healthcare solutions for all your medical needs</p>
               </Col>
             </Row>

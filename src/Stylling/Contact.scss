@@ -65,20 +65,33 @@
     transform: translateX(50%);
 }
 
-.banner-title {
+.banner-title-container {
     position: absolute;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%);
+    width: 90% !important;
+    max-width: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     z-index: 3;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+.banner-title {
+    width: 90%;
+    padding-left: 0; /* Align with navbar container start */
 }
 
 .banner-title h1 {
     font-size: 4rem;
     font-weight: 700;
-    color: #1E40AF;
+    background: linear-gradient(to right, #0181f5, #5db2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     margin: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* Main Content Section */
@@ -94,7 +107,10 @@
 .contact-info-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1E40AF;
+    background: linear-gradient(to right, #0181f5, #5db2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -119,9 +135,26 @@
 }
 
 .contact-icon {
-    color: #8B5CF6;
+    color: #0181f5;
     font-size: 1.2rem;
     min-width: 20px;
+    /* Apply gradient using CSS - works for FontAwesome SVG icons */
+    background: linear-gradient(to right, #0181f5, #5db2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* For SVG fill */
+    fill: url(#contactIconGradient);
+}
+
+/* Ensure SVG paths use the gradient */
+.contact-icon path {
+    fill: url(#contactIconGradient);
+}
+
+/* Fallback: solid gradient color */
+.contact-icon {
+    color: #0181f5;
 }
 
 .contact-item span {
@@ -208,8 +241,8 @@
 }
 
 .send-message-btn {
-    background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%);
-    color: #ffffff;
+    background: linear-gradient(to right, #0181f5, #5db2ff);
+        color: #ffffff;
     border: none;
     padding: 15px 30px;
     border-radius: 8px;
@@ -221,9 +254,10 @@
 }
 
 .send-message-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #7C3AED 0%, #9333EA 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    border:1px solid #0181f5;
+    color: transparent;
 }
 
 .send-message-btn:disabled {
@@ -263,6 +297,10 @@
     
     .contact-form-container {
         padding: 30px;
+    }
+    
+    .banner-title-container {
+        width: 90%;
     }
 }
 
