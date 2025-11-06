@@ -85,12 +85,14 @@ function Contact() {
     
     // Validate form first
     if (!validateForm()) {
+      // eslint-disable-next-line no-console
       console.log('❌ Form validation failed:', errors);
       return;
     }
     
     // Start loading
     setIsLoading(true);
+    // eslint-disable-next-line no-console
     console.log('🔄 Form submission started...');
     
     try {
@@ -98,14 +100,23 @@ function Contact() {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Show form data in console
+      // eslint-disable-next-line no-console
       console.log('=== CONTACT FORM SUBMITTED ===');
+      // eslint-disable-next-line no-console
       console.log('Form Data:', formData);
+      // eslint-disable-next-line no-console
       console.log('First Name:', formData.firstName);
+      // eslint-disable-next-line no-console
       console.log('Last Name:', formData.lastName);
+      // eslint-disable-next-line no-console
       console.log('Email:', formData.email);
+      // eslint-disable-next-line no-console
       console.log('Phone:', formData.phone);
+      // eslint-disable-next-line no-console
       console.log('Message:', formData.message);
+      // eslint-disable-next-line no-console
       console.log('Submission Time:', new Date().toLocaleString());
+      // eslint-disable-next-line no-console
       console.log('================================');
       
       // Show success message
@@ -124,11 +135,13 @@ function Contact() {
       setErrors({});
       
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('❌ Form submission error:', error);
       alert('Sorry, there was an error sending your message. Please try again.');
     } finally {
       // Stop loading
       setIsLoading(false);
+      // eslint-disable-next-line no-console
       console.log('✅ Form submission completed');
     }
   };
