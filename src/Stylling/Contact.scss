@@ -244,6 +244,7 @@
     background: linear-gradient(to right, #0181f5, #5db2ff);
         color: #ffffff;
     border: none;
+    border: 1px solid transparent;
     padding: 15px 30px;
     border-radius: 8px;
     font-size: 1.1rem;
@@ -254,10 +255,10 @@
 }
 
 .send-message-btn:hover:not(:disabled) {
-    -webkit-background-clip: text;
-    background-clip: text;
-    border:1px solid #0181f5;
-    color: transparent;
+    background: transparent;
+        border: 1px solid #0181f5;
+    color: #0181f5;
+    box-shadow: 0 5px 15px rgba(1, 129, 245, 0.4);
 }
 
 .send-message-btn:disabled {
