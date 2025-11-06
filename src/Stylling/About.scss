@@ -44,7 +44,6 @@
 .about-hero-banner .banner-title {
   position: relative;
   z-index: 3;
-  text-align: center;
   color: white;
 }
 
@@ -52,7 +51,6 @@
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .about-hero-banner .banner-title p {
@@ -114,7 +112,34 @@
   transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
 }
+.about-stats-section-title h2{
+  background: linear-gradient(to right, #0181f5, #5db2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.card-body h3 {
+  background: linear-gradient(to right, #0181f5, #5db2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.our-mission-title{
+  background: linear-gradient(to right, #0181f5, #5db2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
+/* Apply gradient fill to SVG icons */
+.card-body svg {
+  fill: url(#svgGradient) !important;
+}
+
+/* Ensure all SVG paths use the gradient */
+.card-body svg path {
+  fill: url(#svgGradient) !important;
+}
 .about-team-section .team-image {
   height: 300px;
   overflow: hidden;

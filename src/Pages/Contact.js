@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SEO from "../Component/SEO.js";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import Container from 'react-bootstrap/Container';
 
 function Contact() {
   useEffect(() => {
@@ -185,15 +186,26 @@ function Contact() {
         canonical="/contact"
         structuredData={contactStructuredData}
       />
+      {/* SVG Gradient Definition */}
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
+        <defs>
+          <linearGradient id="contactIconGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#0181f5" />
+            <stop offset="100%" stopColor="#5db2ff" />
+          </linearGradient>
+        </defs>
+      </svg>
       <div className='contact-page'>
         {/* Header Banner with Image and Heart Overlay */}
         <div className='contact-header-banner'>
           <div className='banner-image'>
-            <div className='heart-overlay'></div>
+           
           </div>
-          <div className='banner-title'>
-            <h1>Contact Us</h1>
-          </div>
+          <Container fluid className='banner-title-container'>
+            <div className='banner-title'>
+              <h1>Contact Us</h1>
+            </div>
+          </Container>
         </div>
 
         {/* Main Content Section */}

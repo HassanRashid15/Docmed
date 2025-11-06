@@ -636,6 +636,9 @@ padding-bottom: 120px;
 .tab-content .tab-pane{
     padding: 35px 0px;
 }
+.slider-parent {
+    position: relative; /* Positioning context for navigation buttons */
+}
 .slider-parent .slider-custom{
     padding: 0px;
 }
@@ -645,9 +648,19 @@ padding-bottom: 120px;
      border-radius:0%; 
     }
 .slick-slider{
-    overflow: hidden;
+    overflow: visible; /* Allow buttons to be visible */
     width: 92%;
     margin: auto;
+    position: relative;
+}
+
+/* Position buttons relative to slider-parent */
+.slider-parent .slick-prev,
+.slider-parent .slick-next {
+    position: absolute !important;
+}
+.slick-slide {
+    padding: 0 5px; /* Additional spacing between slides */
 }
 .slick-dots li{
     background-color: unset !important;
@@ -681,14 +694,13 @@ padding-bottom: 120px;
      height: unset !important;
      border-radius: 3px;
     width: 50px !important;
-    /* margin: 10px 0px; */
     right: 19px !important;
-    top: 30px !important;
+    top: -40px !important; /* Position above the slider */
     padding: 9px !important;
     color: #5DB2FF !important;
-    /* position: absolute; */
     position: absolute !important;
-    /* z-index: 333333; */
+    z-index: 10 !important;
+    background: white !important;
 }
 .slick-next:hover{
     color: white !important;
@@ -711,12 +723,13 @@ color: unset !important;
     height: unset !important;
     border-radius: 3px;
     width: 50px !important;
-    /* margin: 10px 0px; */
-    right:80px !important;
-    top: 30px !important;
+    right: 80px !important;
+    top: -40px !important; /* Position above the slider */
     padding: 9px !important;
     color: #5DB2FF !important;
     position: absolute !important;
+    z-index: 10 !important;
+    background: white !important;
 }
 .slick-prev:hover{
     color: white !important;
@@ -725,6 +738,63 @@ color: unset !important;
 .slick-list {
     margin: 40px auto !important;
     margin-bottom: 15px !important;
+    margin-top: 80px !important; /* Add top margin to accommodate buttons */
+}
+
+/* Responsive adjustments for buttons and gaps */
+@media (max-width: 1024px) {
+    .slick-prev,
+    .slick-next {
+        top: -60px !important;
+    }
+    .slick-list {
+        margin-top: 70px !important;
+    }
+    .slider-parent .slider-custom {
+        margin: 0 8px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .slick-prev,
+    .slick-next {
+        top: -50px !important;
+        width: 40px !important;
+        padding: 7px !important;
+    }
+    .slick-prev {
+        right: 60px !important;
+    }
+    .slick-next {
+        right: 10px !important;
+    }
+    .slick-list {
+        margin-top: 60px !important;
+    }
+    .slider-parent .slider-custom {
+        margin: 0 5px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .slick-prev,
+    .slick-next {
+        top: -45px !important;
+        width: 35px !important;
+        padding: 6px !important;
+    }
+    .slick-prev {
+        right: 50px !important;
+    }
+    .slick-next {
+        right: 5px !important;
+    }
+    .slick-list {
+        margin-top: 55px !important;
+    }
+    .slider-parent .slider-custom {
+        margin: 0 3px !important;
+    }
 }
 li.slick-active{
 color: red;
@@ -932,42 +1002,28 @@ margin-bottom: 10px;
     margin-top: -80px; /* Adjust this value based on your navbar height */
 }
 
-/* Perfect Seamless Ticker - Based on Proven Example */
-.ticker-wrap {
-    width: 100%;
-    height: 60px;
-    margin: 0 auto;
+/* Marquee Ticker - CSS-only seamless loop */
+.marquee {
     overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    background: linear-gradient(135deg, #0181f5 0%, #5db2ff 100%);
-    box-shadow: 0 2px 10px rgba(1, 129, 245, 0.3);
+    display: block;
+    margin: 0;
     display: flex;
     align-items: center;
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    flex: 1;
+    height: 60px;
+    background: linear-gradient(135deg, #0181f5 0%, #5db2ff 100%);
+    box-shadow: 0 2px 10px rgba(1, 129, 245, 0.3);
 }
 
-.ticker {
-    display: inline-block;
-    margin-top: 5px;
-    animation: marquee 20s linear infinite;
-}
-
-.item-collection-1 {
-    position: relative;
-    left: 0%;
-    animation: swap 20s linear infinite;
-}
-
-.item-collection-2 {
-    position: relative;
-    left: 100%;
-    animation: swap 20s linear infinite;
-}
-
-.item {
-    display: inline-block;
-    padding: 0 2rem;
-    font-size: 16px;
+.marquee::before {
+    display: block;
+    white-space: pre;
+    /* Abusing `content` property and `attr` function to duplicate content in CSS */
+    content: attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text) "  •  " attr(data-text);
+    width: fit-content;
+    transform: translate3d(-2%, 0, 0);
+    will-change: transform;
     color: #ffffff;
     font-weight: 500;
     font-family: "Poppins", sans-serif;
@@ -975,48 +1031,64 @@ margin-bottom: 10px;
     text-transform: uppercase;
 }
 
+/**
+ * Only run animations when reduced motion is not set
+ * Thanks @patrick_h_lauke@mastodon.social for the heads up!
+ */
+@media (prefers-reduced-motion: no-preference) {
+    .marquee::before {
+        animation: marquee 6s linear infinite;
+    }
+}
 
-/* Perfect seamless animation */
 @keyframes marquee {
     0% {
-        transform: translateX(0);
+        /**
+         * -2% is used to start scrolling with an offset (visual only)
+         */
+        transform: translate3d(-2%, 0, 0);
     }
     100% {
-        transform: translateX(-100%);
+        /**
+         * -2% offset has to be preserved
+         *
+         * Content is duplicated 20 times
+         * 100% / 20 = 5 % = "1 content length"
+         * 
+         * -1px seems to prevent a small jump between each loop
+         */
+        transform: translate3d(calc(-2% - 5% - 1px), 0, 0);
     }
 }
 
-@keyframes swap {
-    0%, 50% {
-        left: 0%;
-    }
-    50.01%, 100% {
-        left: 100%;
-    }
+.marquee--navy {
+    background: linear-gradient(135deg, #0181f5 0%, #5db2ff 100%);
 }
 
-/* Pause on hover */
-.ticker-wrap:hover .ticker {
-    animation-play-state: paused;
-}
-
-.ticker-wrap:hover .item-collection-1,
-.ticker-wrap:hover .item-collection-2 {
-    animation-play-state: paused;
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 /* Responsive ticker */
 @media (max-width: 768px) {
-    .item {
-        font-size: 14px;
-        padding: 0 1.5rem;
+    .marquee {
+        font-size: clamp(0.875rem, 1.5vh, 1.25rem);
+        height: 50px;
     }
 }
 
 @media (max-width: 480px) {
-    .item {
-        font-size: 12px;
-        padding: 0 1rem;
+    .marquee {
+        font-size: clamp(0.75rem, 1vh, 1rem);
+        height: 45px;
     }
 }
 
