@@ -17,6 +17,7 @@ import {
   MDBTabsPane
 } from 'mdb-react-ui-kit';
 import { FaRegCheckCircle } from "react-icons/fa";
+import Marquee from "./../Component/Marquee.js";
 function Home({ navbarVisible }) {
   useEffect(() => {
     document.title = "DOCMED - Premier Medical Center | Expert Healthcare Services";
@@ -188,9 +189,7 @@ function Home({ navbarVisible }) {
         </div>
         
         {/* Medical Services Ticker */}
-        <figure className="marquee marquee--navy" data-text="Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today">
-          <span className="sr-only">Emergency Care Available 24/7 ★ Expert Medical Professionals ★ Advanced Medical Technology ★ Comprehensive Health Services ★ Patient-Centered Care ★ Book Your Appointment Today</span>
-        </figure>
+        <Marquee />
         <div className='welcome-section d-flex'>
           <div className='welcome-section-image-custom'>
             <img src={docpic} alt="Professional doctor providing healthcare services at Docmed Medical Center" />
