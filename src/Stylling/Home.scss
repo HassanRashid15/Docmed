@@ -1130,4 +1130,9 @@ margin-bottom: 10px;
   .read-the-docs {
     color: #888;
   }
-  
+ 
+  @media (max-width: 767px) {
+.hero-section-content{
+    margin-bottom: 0px;
+}
+  }
