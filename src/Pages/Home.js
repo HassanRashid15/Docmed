@@ -17,6 +17,7 @@ import {
   MDBTabsPane
 } from 'mdb-react-ui-kit';
 import { FaRegCheckCircle } from "react-icons/fa";
+import Newsletter from './../Component/Newsletter';
 function Home({ navbarVisible }) {
   useEffect(() => {
     document.title = "DOCMED - Premier Medical Center | Expert Healthcare Services";
@@ -498,16 +499,7 @@ function Home({ navbarVisible }) {
       </div>
     </Slider>
     </div>
-    <div className='appointment-section-parent '>
-    <div className='appointment-section-custom'>
-      <div className='appointment-section-content'>
-<h5>Get In Touch</h5>
-<h1>Best Medical & Health Care Near Your City</h1>
-<h6>We've 25 Years of experience in Medical Services.</h6>
-<button>Book An Appointment</button>
-</div>
-    </div>
-    </div>
+          <Newsletter />
       </div>
     </>
   )
