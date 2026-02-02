@@ -32,9 +32,6 @@
 .navbar-middle-custom{
 margin: 0;
 }
-.navbar-toggler{
-    background-image: url();
-}
 .navbar-button-custom button{
     background: #009DFF;
     padding: 8 px 30px;
@@ -175,6 +172,7 @@ color: #009DFF !important;
 .web-heading{
     background: linear-gradient(to right, #0181f5, #5db2ff) !important;
     -webkit-background-clip: text !important;
+    background-clip: text !important;
     color: transparent !important;
     font-weight: 700 !important;
 }
