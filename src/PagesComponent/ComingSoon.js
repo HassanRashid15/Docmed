@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Smartphone, Star, Download, Apple, Shield, Zap, Users, X } from 'lucide-react';
 
 export default function ComingSoon() {
   const [showPopup, setShowPopup] = useState(false);
