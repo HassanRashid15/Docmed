@@ -87,7 +87,7 @@ useEffect(() => {
               <div className="w-full">
                 <div className="relative">
                   <img 
-                    src={require('../Assets/Images/comingsoon.png')}
+                    src="/comingsoon.png"
                     alt="App Interface Preview"
                     className="w-full h-full object-cover rounded-xl mb-0"
                   />
@@ -99,7 +99,7 @@ useEffect(() => {
                 <div className="bg-white rounded-2xl p-4 shadow-2xl w-56">
                   <div className="relative">
                     <img 
-                      src="/Assets/Images/comingsoon.png"
+                      src="/comingsoon.png"
                       alt="App Interface Preview"
                       className="w-full h-40 object-cover rounded-xl mb-3"
                     />
