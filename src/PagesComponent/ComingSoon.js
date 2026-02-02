@@ -169,34 +169,36 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* Add animation keyframes to global styles or use a CSS-in-JS solution */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
+      {/* Animation styles as inline style */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: scale(0.9);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
           }
-          to {
-            opacity: 1;
-            transform: scale(1);
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
           }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-        
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
+          
+          @keyframes spin {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
           }
-          to {
-            transform: rotate(360deg);
+          .animate-spin {
+            animation: spin 1s linear infinite;
           }
-        }
-        .animate-spin {
-          animation: spin 1s linear infinite;
-        }
-      `}</style>
+        `
+      }} />
     </div>
   );
 }
