@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SEO from "./../Component/SEO.js";
-import { LuStethoscope } from "react-icons/lu";
-import { IoMdNutrition } from "react-icons/io";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import docpic from "./../Assets/Images/docpic.png";
-import VectorSVG from "./../Assets/Images/Vector.svg";
-import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
-import { LiaHospitalAltSolid } from "react-icons/lia";
+import ComingSoon from "./../PagesComponent/ComingSoon";
+import ServicesSection from "../PagesComponent/ServicesSection";
 import {
   MDBTabs,
   MDBTabsItem,
@@ -225,7 +222,8 @@ function Home({ navbarVisible }) {
             <h4>Services</h4>
             <h5>Services We Provide</h5>
           </div>
-          <div className='serivce-section-parent d-flex'>
+<ServicesSection /> 
+          {/* <div className='serivce-section-parent d-flex'>
             <div className='service-section' data-aos="fade-up" 
   data-aos-duration="1100" 
   data-aos-delay="200">
@@ -288,7 +286,10 @@ function Home({ navbarVisible }) {
               </div>
             </div>
 
-          </div>
+          </div> */}
+
+
+
         </div>
         <div className='department-parent-section'>
           <div className='department-section'>
@@ -500,6 +501,9 @@ function Home({ navbarVisible }) {
     </Slider>
     </div>
           <Newsletter />
+
+          <ComingSoon/>
+
       </div>
     </>
   )
