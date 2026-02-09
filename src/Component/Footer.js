@@ -109,11 +109,8 @@ function Footer() {
         
         {/* Footer Copyright */}
         <MDBFooter className='connected-section-custom-parent text-center text-lg-start text-muted'>
-          <section className='connected-section-custom d-flex justify-content-center justify-content-lg-between py-0 border-bottom'>
-            {/* Empty section - you can add content here if needed */}
-          </section>
-          
-          <div className='text-end p-4 text-white'>
+          <section className='connected-section-custom d-flex justify-content-center justify-content-lg-between py-0'>
+                      <div className='text-end p-3 w-full text-white'>
             Copyright © 2024 
             <em>
               <a className='text-reset footer-copyright-area fw-bold'>
@@ -121,6 +118,10 @@ function Footer() {
               </a>
             </em>
           </div>
+            {/* Empty section - you can add content here if needed */}
+          </section>
+          
+
         </MDBFooter>
       </div>
     </>

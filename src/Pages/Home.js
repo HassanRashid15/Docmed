@@ -15,6 +15,7 @@ import {
 } from 'mdb-react-ui-kit';
 import { FaRegCheckCircle } from "react-icons/fa";
 import Newsletter from './../Component/Newsletter';
+import Department from './Department.js';
 function Home({ navbarVisible }) {
   useEffect(() => {
     document.title = "DOCMED - Premier Medical Center | Expert Healthcare Services";
@@ -291,85 +292,7 @@ function Home({ navbarVisible }) {
 
 
         </div>
-        <div className='department-parent-section'>
-          <div className='department-section'>
-            <div className='department-content-section' data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="300">
-              <h5>DEPARTMENTS</h5>
-              <h1>Our departments</h1>
-              <p>Esteem spirit temper too say adieus who direct esteem.
-                It esteems luckily or picture placing drawing.</p>
-            </div>
-            <div className='department-card-body pt-4'>
-              <div className='department-card-section' >
-                <div className="card"  data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="300" >
-                  <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Eye Care" />
-                  <div className="card-body">
-                    <h5 className="card-title">Eye Care</h5>
-                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" className="btn ">Learn More</a>
-                  </div>
-                </div>
-                <div className="card"   data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="600">
-                  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Physical Therapy" />
-                  <div className="card-body">
-                    <h5 className="card-title">Physical Therapy</h5>
-                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" className="btn">Learn More</a>
-                  </div>
-                </div>
-                <div className="card"  data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="900">
-                  <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Dental Care" />
-                  <div className="card-body">
-                    <h5 className="card-title">Dental Care</h5>
-                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" className="btn ">Learn More</a>
-                  </div>
-                </div>
-                <div className="card"  data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="1200">
-                  <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Diagnostic Test" />
-                  <div className="card-body">
-                    <h5 className="card-title">Diagnostic Test</h5>
-                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" className="btn ">Learn More</a>
-                  </div>
-                </div>
-                <div className="card"  data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="1500">
-                  <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Skin Surgery" />
-                  <div className="card-body">
-                    <h5 className="card-title">Skin Surgery</h5>
-                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" className="btn ">Learn More</a>
-                  </div>
-                </div>
-                <div className="card"  data-aos="fade-up" 
-  data-aos-duration="1100" 
-  data-aos-delay="1800">
-                  <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=250&fit=crop&crop=center" className="card-img-top" alt="Surgery Service" />
-                  <div className="card-body">
-                    <h5 className="card-title">Surgery Service</h5>
-                    <p className="card-text">Esteem spirit temper too say adieus who direct esteem.</p>
-                    <a href="#" className="btn">Learn More</a>
-                  </div>
-                </div>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
+    <Department/>
 
 
         {/* <MDBCarousel showIndicators showControls fade interval={50000}>

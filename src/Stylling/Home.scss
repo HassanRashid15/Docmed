@@ -1037,7 +1037,7 @@ margin-bottom: 10px;
  */
 @media (prefers-reduced-motion: no-preference) {
     .marquee::before {
-        animation: marquee 6s linear infinite;
+        animation: marquee 13s linear infinite;
     }
 }
 
