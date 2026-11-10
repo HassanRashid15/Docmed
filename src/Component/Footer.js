@@ -1,131 +1,153 @@
-import React from 'react'
-import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit'
-import footerheadimg from "./../Assets/Images/footerheadimg.png"
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import nav_logo from '../Assets/Images/nav_logo.png';
+import { SITE } from '../constants/siteInfo';
+import {
+  FOOTER_CLINICAL_LINKS,
+  FOOTER_ABOUT_LINKS,
+  FOOTER_LEGAL_LINKS,
+} from '../constants/footerData';
 
 function Footer() {
-  // All footer data in one object
-  const footerData = {
-    socialLinks: [
-      { icon: "facebook-f", url: "" },
-      { icon: "twitter", url: "" },
-      { icon: "google", url: "" },
-      { icon: "instagram", url: "" },
-      { icon: "linkedin", url: "" },
-      { icon: "github", url: "" }
-    ],
-    sections: [
-      {
-        title: "Products",
-        links: [
-          { name: "Angular", url: "#!" },
-          { name: "React", url: "#!" },
-          { name: "Vue", url: "#!" },
-          { name: "Laravel", url: "#!" }
-        ]
-      },
-      {
-        title: "Useful links",
-        links: [
-          { name: "Pricing", url: "#!" },
-          { name: "Settings", url: "#!" },
-          { name: "Orders", url: "#!" },
-          { name: "Help", url: "#!" }
-        ]
-      },
-      {
-        title: "Contact",
-        info: [
-          { icon: "home", text: "New York, NY 10012, US" },
-          { icon: "envelope", text: "info@example.com" },
-          { icon: "phone", text: "+ 01 234 567 88" },
-          { icon: "print", text: "+ 01 234 567 89" }
-        ]
-      }
-    ]
-  }
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    setEmail('');
+  };
 
   return (
-    <>
-      <div className='footer-page-custom footer-page'>
-        <section className='footer-parent-custom'>
-          <MDBContainer className='footer-alignment-custom text-center text-md-start mt-5'>
-            <MDBRow className='mt-3'>
-              {/* Logo Section */}
-              <div className='footer-logo-section d-flex align-items-center gap-1 ps-0 pb-2'>
-                <img src={footerheadimg} alt="Docmed Logo" width={80} height={80} />
-                <h6 className='fs-4 text-uppercase fw-bold mb-0'>DOCMED</h6>
-              </div>
-
-              {/* Company Info & Social Media */}
-              <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
-                <p>
-                  Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit.
-                </p>
-                <div className='me-5 d-none d-lg-block'>
-                  <span>Get connected with us on social networks:</span>
-                </div>
-                <div className="connected-section-custom">
-                  {footerData.socialLinks.map((link, index) => (
-                    <a key={index} href={link.url} className='me-4 text-reset'>
-                      <MDBIcon fab icon={link.icon} />
-                    </a>
-                  ))}
-                </div>
-              </MDBCol>
-
-              {/* Dynamic Sections */}
-              {footerData.sections.map((section, index) => (
-                <MDBCol 
-                  key={index} 
-                  md={section.title === "Contact" ? "4" : section.title === "Useful links" ? "3" : "2"} 
-                  lg={section.title === "Contact" ? "3" : "2"} 
-                  xl={section.title === "Contact" ? "3" : "2"} 
-                  className='mx-auto mb-4'
+    <footer className="mt-20 w-full bg-surface-container-low [&_a]:no-underline [&_ul]:mb-0">
+      <div className="mx-auto max-w-7xl px-6 pb-2 pt-16 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <img alt={`${SITE.name} Logo`} className="h-10 w-auto object-contain" src={nav_logo} />
+              <span className="text-title text-primary">{SITE.legalName}</span>
+            </div>
+            <p className="max-w-sm text-body-md text-on-surface-variant">{SITE.description}</p>
+            <div className="space-y-1 pt-1 text-body-md text-on-surface-variant">
+              <p className="m-0">{SITE.address.street}</p>
+              <p className="m-0">{SITE.address.line2}</p>
+              <p className="m-0">
+                <a
+                  href={SITE.phone.href}
+                  className="text-on-surface-variant transition-colors hover:text-primary"
                 >
-                  <h6 className='text-uppercase fw-bold mb-4'>{section.title}</h6>
-                  
-                  {section.links ? (
-                    section.links.map((link, linkIndex) => (
-                      <p key={linkIndex}>
-                        <a href={link.url} className='text-reset'>
-                          {link.name}
-                        </a>
-                      </p>
-                    ))
-                  ) : (
-                    section.info.map((info, infoIndex) => (
-                      <p key={infoIndex}>
-                        <MDBIcon icon={info.icon} className="me-2" />
-                        {info.text}
-                      </p>
-                    ))
-                  )}
-                </MDBCol>
+                  {SITE.phone.display}
+                </a>
+              </p>
+              <p className="m-0">
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="text-on-surface-variant transition-colors hover:text-primary"
+                >
+                  {SITE.email}
+                </a>
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              {SITE.badges.map((badge) => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center rounded-full bg-surface-container-high px-2.5 py-1 text-caption uppercase tracking-wider text-on-surface-variant"
+                >
+                  {badge}
+                </span>
               ))}
-            </MDBRow>
-          </MDBContainer>
-        </section>
-        
-        {/* Footer Copyright */}
-        <MDBFooter className='connected-section-custom-parent text-center text-lg-start text-muted'>
-          <section className='connected-section-custom d-flex justify-content-center justify-content-lg-between py-0'>
-                      <div className='text-end p-3 w-full text-white'>
-            Copyright © 2024 
-            <em>
-              <a className='text-reset footer-copyright-area fw-bold'>
-                HR TECH All rights reserved
-              </a>
-            </em>
+            </div>
           </div>
-            {/* Empty section - you can add content here if needed */}
-          </section>
-          
 
-        </MDBFooter>
+          <div>
+            <h4 className="mb-4 text-label-md uppercase tracking-wider text-on-surface">
+              Clinical Care &amp; Services
+            </h4>
+            <ul className="m-0 list-none space-y-2.5 p-0">
+              {FOOTER_CLINICAL_LINKS.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.to}
+                    className="text-body-md text-on-surface-variant transition-colors hover:text-primary"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-label-md uppercase tracking-wider text-on-surface">
+              About &amp; Resources
+            </h4>
+            <ul className="m-0 list-none space-y-2.5 p-0">
+              {FOOTER_ABOUT_LINKS.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.to}
+                    className="text-body-md text-on-surface-variant transition-colors hover:text-primary"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-label-md uppercase tracking-wider text-on-surface">
+              Stay Connected
+            </h4>
+            <p className="mb-4 text-body-md text-on-surface-variant">
+              Subscribe to medical advisories and wellness reports from our chief clinicians.
+            </p>
+            <form className="flex flex-col gap-2" onSubmit={handleSubscribe}>
+              <div className="flex w-full overflow-hidden rounded-full bg-white shadow-[0_2px_8px_rgba(11,28,48,0.1)]">
+                <input
+                  className="min-w-0 flex-1 bg-transparent px-4 py-3 text-body-md text-on-surface placeholder:text-outline focus:outline-none sm:px-5"
+                  placeholder="Enter email address"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <button
+                  className="shrink-0 bg-docmed-green px-4 py-3 text-label-md font-semibold uppercase tracking-wide text-white transition-all hover:bg-docmed-green-dark active:scale-[0.98] md:px-5"
+                  type="submit"
+                  aria-label="Subscribe"
+                >
+                  <span className="md:hidden">Subscribe →</span>
+                  <span className="hidden md:inline" aria-hidden="true">
+                    →
+                  </span>
+                </button>
+              </div>
+              <span className="text-caption text-on-surface-variant">
+                Strictly confidential. No marketing spam.
+              </span>
+            </form>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-surface-container-high pt-8 md:flex-row">
+          <p className="m-0 text-body-md text-on-surface-variant">
+            © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            {FOOTER_LEGAL_LINKS.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-caption text-on-surface-variant transition-colors hover:text-on-surface"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
-    </>
-  )
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;

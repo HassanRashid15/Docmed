@@ -1,0 +1,27 @@
+/* Loaded after Bootstrap so default link underlines don't show on CTAs */
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+
+/* Kill Bootstrap / browser default outlines site-wide */
+*:focus,
+*:focus-visible,
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible,
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}

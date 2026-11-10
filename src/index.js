@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './link-reset.css';
 import App from './App';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <React.StrictMode>
-      <Router>
-    <App />
+    <Router>
+      <App />
     </Router>
   </React.StrictMode>
 );

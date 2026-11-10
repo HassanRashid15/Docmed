@@ -1,97 +1,190 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import { RxHamburgerMenu } from "react-icons/rx";
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import weblogo from "./../Assets/Images/weblogo.png";
-import VectorSVG from "./../Assets/Images/Vector.svg";
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { RxHamburgerMenu } from 'react-icons/rx';
+import nav_logo from '../Assets/Images/nav_logo.png';
+import { IoClose } from 'react-icons/io5';
+import { ROUTES, SITE } from '../constants/siteInfo';
 
-function MyNavbar({ onNavbarVisibilityChange }) {
-  const [navbarVisible, setNavbarVisible] = useState(true); // Hide initially
+const links = [
+  { label: 'Home', to: ROUTES.home },
+  { label: 'Services', to: ROUTES.service },
+  { label: 'Find Doctors', to: ROUTES.findDoctors },
+  { label: 'About Us', to: ROUTES.about },
+  { label: 'Contact Us', to: ROUTES.contact },
+];
+
+function isLinkActive(pathname, link) {
+  if (link.to === ROUTES.home) return pathname === ROUTES.home;
+  if (link.to === ROUTES.findDoctors) return pathname === ROUTES.findDoctors;
+  if (link.to === ROUTES.service) return pathname === ROUTES.service;
+  if (link.to === ROUTES.about) return pathname === ROUTES.about;
+  if (link.to === ROUTES.contact) return pathname === ROUTES.contact;
+  return false;
+}
+
+function MyNavbar({ compact = false }) {
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      console.log("ScrollY:", window.scrollY);
-      if (window.scrollY === 0 || window.scrollY > 100) {
-        setNavbarVisible(true);
-      } else {
-        setNavbarVisible(false);
-      }
-    };
-
-    if (window.innerWidth > 1024) {
-      window.addEventListener('scroll', handleScroll);
-    }
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Notify parent component when navbar visibility changes
-  useEffect(() => {
-    if (onNavbarVisibilityChange) {
-      onNavbarVisibilityChange(navbarVisible);
-    }
-  }, [navbarVisible, onNavbarVisibilityChange]);
-
-  const titleMap = {
-    '/': 'Home Page',
-    '/about': 'About Page',
-    '/service': 'Service Page',
-    '/contact': 'Contact Page'
-  };
-
-  useEffect(() => {
-    const pageTitle = titleMap[location.pathname] || 'My App';
-    document.title = pageTitle;
-  }, [location]);
+  const [open, setOpen] = useState(false);
 
   return (
-    <Navbar expand="lg" className={`bg-white/80 navbar-parent ${navbarVisible ? 'visible' : 'hidden'}`} fixed="top">
-      <Container fluid className='navbar-page'>
-        <div className='navbar-logo-section'>
-          <img src={weblogo} alt="Docmed Logo" className="navbar-logo"/>
-          <Navbar.Brand className='web-heading' href="#">DOCMED</Navbar.Brand>
+    <nav className="relative bg-transparent">
+      {/* Desktop — 1186px+ only; 1024–1185 uses tablet hamburger */}
+      <div
+        className={`mx-auto hidden items-center min-[1186px]:flex ${
+          compact ? 'gap-3 px-4 py-2' : 'max-w-[1400px] gap-5 px-6 py-3'
+        }`}
+      >
+        <Link
+          to={ROUTES.home}
+          className="flex shrink-0 items-center gap-2 whitespace-nowrap no-underline"
+        >
+          <img
+            src={nav_logo}
+            alt=""
+            className={`w-auto object-contain ${compact ? 'h-8' : 'h-10'}`}
+          />
+          <span
+            className={`font-semibold tracking-tight text-slate-900 ${
+              compact ? 'text-base' : 'text-lg'
+            }`}
+          >
+            DocMed
+          </span>
+        </Link>
+
+        <div
+          className={`flex min-w-0 flex-1 flex-nowrap items-center justify-center ${
+            compact ? 'gap-0.5' : 'gap-1'
+          }`}
+        >
+          {links.map((link) => {
+            const active = isLinkActive(location.pathname, link);
+            return (
+              <Link
+                key={link.label}
+                to={link.to}
+                className={`shrink-0 whitespace-nowrap rounded-lg font-medium no-underline transition-colors ${
+                  compact ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-sm'
+                } ${
+                  active
+                    ? 'bg-primary-fixed text-on-primary-fixed-variant'
+                    : 'text-slate-600 hover:bg-surface-container-low hover:text-primary'
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
-        
-        {/* Mobile controls - appointment button and hamburger menu */}
-        <div className='navbar-mobile-controls d-lg-none'>
-          <div className='navbar-appointment-mobile'>
-            <div className='navbar-button-custom'>
-              <Button className='appointment-icon-btn'>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 15H12.01M12 12H12.01M12 9H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Button>
-            </div>
+
+        <div className={`flex shrink-0 flex-nowrap items-center ${compact ? 'gap-1.5' : 'gap-2'}`}>
+          <a
+            href={SITE.emergencyPhone.href}
+            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#fde8e8] font-medium text-[#c62828] no-underline hover:bg-[#fcdada] ${
+              compact ? 'px-2.5 py-1 text-[11px]' : 'px-3.5 py-2 text-[13px]'
+            }`}
+          >
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#e53935]" aria-hidden="true" />
+            {compact ? SITE.emergencyPhone.display : `Emergency: ${SITE.emergencyPhone.display}`}
+          </a>
+
+          <Link
+            to={ROUTES.patientPortal}
+            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-secondary-fixed font-medium text-on-secondary-fixed-variant no-underline hover:bg-[#cfd6ef] ${
+              compact ? 'px-2.5 py-1 text-[11px]' : 'px-3.5 py-2 text-[13px]'
+            }`}
+          >
+            {compact ? 'Portal' : 'Patient Portal Login'}
+          </Link>
+
+          <Link
+            to={ROUTES.findDoctors}
+            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-lg bg-primary font-semibold text-white no-underline hover:bg-primary-container ${
+              compact ? 'px-3 py-1 text-[11px]' : 'px-4 py-2 text-[13px]'
+            }`}
+          >
+            {compact ? 'Book' : 'Book Appointment'}
+          </Link>
+        </div>
+      </div>
+
+      {/* Tablet + mobile — below 1186px */}
+      <div className="flex items-center justify-between px-4 py-2.5 min-[1186px]:hidden">
+        <Link
+          to={ROUTES.home}
+          className="flex shrink-0 items-center gap-2 whitespace-nowrap no-underline"
+        >
+          <img src={nav_logo} alt="" className="h-9 w-auto object-contain" />
+          <span className="text-base font-semibold text-slate-900">DocMed</span>
+        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            to={ROUTES.findDoctors}
+            className="rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white no-underline"
+          >
+            Book
+          </Link>
+          <button
+            type="button"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="border-0 bg-transparent p-1 text-primary"
+          >
+            {open ? <IoClose size={24} /> : <RxHamburgerMenu size={22} />}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="border-t border-outline-variant/40 bg-white px-4 py-3 min-[1186px]:hidden">
+          <div className="flex flex-col gap-1">
+            {links.map((link) => {
+              const active = isLinkActive(location.pathname, link);
+              return (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-lg px-3 py-2.5 text-sm font-medium no-underline ${
+                    active
+                      ? 'bg-primary-fixed text-on-primary-fixed-variant'
+                      : 'text-slate-700 hover:bg-surface-container-low'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
-          
-          <Navbar.Toggle aria-controls="navbarScroll">
-            <RxHamburgerMenu />
-          </Navbar.Toggle>
+
+          <div className="mt-3 flex flex-col gap-2 border-t border-outline-variant/30 pt-3">
+            <a
+              href={SITE.emergencyPhone.href}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#fde8e8] px-3.5 py-2.5 text-sm font-medium text-[#c62828] no-underline"
+            >
+              <span className="h-2 w-2 rounded-full bg-[#e53935]" aria-hidden="true" />
+              Emergency: {SITE.emergencyPhone.display}
+            </a>
+            <Link
+              to={ROUTES.patientPortal}
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center rounded-full bg-secondary-fixed px-3.5 py-2.5 text-sm font-medium text-on-secondary-fixed-variant no-underline"
+            >
+              Patient Portal Login
+            </Link>
+            <Link
+              to={ROUTES.findDoctors}
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white no-underline"
+            >
+              Book Appointment
+            </Link>
+          </div>
         </div>
-        
-        <Navbar.Collapse id="navbarScroll">
-          <Nav className="me-auto my-2 my-lg-0 navbar-middle-custom mx-auto" navbarScroll>
-            <Nav.Link href="/" className={location.pathname === '/' ? 'active' : ''}>Home</Nav.Link>
-            <Nav.Link href="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Nav.Link>
-            <Nav.Link href="/service" className={location.pathname === '/service' ? 'active' : ''}>Service</Nav.Link>
-            <Nav.Link href="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Contact</Nav.Link>
-          </Nav>
-          
-          {/* Appointment button for desktop - hidden on small screens */}
-          <Form className="d-none d-lg-flex navbar-alignment-custom">
-            <div className='navbar-button-custom'>
-              <Button>Make An Appointment</Button>
-            </div>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      )}
+    </nav>
   );
 }
 

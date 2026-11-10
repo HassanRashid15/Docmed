@@ -1,0 +1,520 @@
+/* DocMed EKG preloader — sweep, count 1–100 with beat pulse, logo, fade */
+
+.docmed-preloader {
+  --ekg: #009dff;
+  --ekg-soft: #00bfff;
+  --ekg-screen: #ffffff;
+  --animation-time: 5s;
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ekg-screen);
+  color: var(--ekg);
+  font-family: "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-size: 18px;
+  text-shadow: 0 0 4px var(--ekg);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
+}
+
+.docmed-preloader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 157, 255, 0) 40%,
+    rgba(0, 157, 255, 0.04) 80%
+  );
+  background-size: 5px 3px;
+  transition: opacity 0.7s ease;
+}
+
+.docmed-preloader.is-hiding {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.docmed-preloader.is-hiding::after {
+  opacity: 0;
+}
+
+.docmed-preloader__inner {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 94vw);
+  margin: 0 auto;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docmed-preloader__monitor {
+  width: 100%;
+  transition: opacity 0.7s ease;
+}
+
+.docmed-preloader__monitor.is-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.docmed-preloader__brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+  min-height: 2rem;
+}
+
+.docmed-preloader__pulse-heart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.75));
+  animation: docmed-pulse-heart calc(var(--animation-time) / 6) ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.docmed-preloader__pulse-heart svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.docmed-preloader__row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.docmed-preloader__graph {
+  position: relative;
+  flex: 1 1 83%;
+  min-width: 0;
+  height: 200px;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  background: linear-gradient(
+    90deg,
+    var(--ekg-screen) 0,
+    var(--ekg) 50%,
+    var(--ekg-screen) 50%
+  );
+  background-size: 100% auto;
+  background-position: -380px 0;
+  animation: docmed-ekg-travel var(--animation-time) linear infinite;
+}
+
+.docmed-preloader__graph--full {
+  flex: 1 1 100%;
+}
+
+.docmed-preloader__row--full {
+  width: 100%;
+}
+
+.docmed-preloader__graph.is-done {
+  animation: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+.docmed-preloader__graph.is-done .docmed-preloader__cell {
+  opacity: 0;
+  animation: none;
+  transition: opacity 0.45s ease;
+}
+
+.docmed-preloader__flatline {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--ekg);
+  box-shadow: 0 0 8px var(--ekg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.docmed-preloader__flatline.is-drawing {
+  opacity: 1;
+  animation: docmed-ekg-flatline 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.docmed-preloader__cell {
+  margin: 0;
+  flex: 1 1 16.7%;
+  width: 16.7%;
+  height: 100%;
+  background-image: var(--ekg-sprite);
+  background-size: 700% auto;
+  background-repeat: no-repeat;
+  animation: docmed-ekg-shuffle calc(var(--animation-time) * 6) steps(1) infinite;
+  animation-fill-mode: both;
+}
+
+.docmed-preloader__cell--1 {
+  background-position: 0 0;
+  animation-delay: calc(var(--animation-time) / 6 * -2);
+}
+
+.docmed-preloader__cell--2 {
+  background-position: 16.6% 0;
+  animation-delay: calc(var(--animation-time) / 6 * -13);
+}
+
+.docmed-preloader__cell--3 {
+  background-position: 33.3% 0;
+  animation-delay: calc(var(--animation-time) / 6 * -30);
+}
+
+.docmed-preloader__cell--4 {
+  background-position: 50% 0;
+  animation-delay: calc(var(--animation-time) / 6 * -5);
+}
+
+.docmed-preloader__cell--5 {
+  background-position: 66.6% 0;
+  animation-delay: calc(var(--animation-time) / 6 * -22);
+}
+
+.docmed-preloader__cell--6 {
+  background-position: 83.3% 0;
+  animation-delay: calc(var(--animation-time) / 6 * -9);
+}
+
+.docmed-preloader__vitals {
+  flex: 0 0 17%;
+  width: 6.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-left: 0.5rem;
+}
+
+.docmed-preloader__bpm {
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1;
+  width: 6.5rem;
+  text-align: center;
+  color: var(--ekg-soft);
+  font-variant-numeric: tabular-nums;
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: transform;
+  text-shadow: 0 0 8px rgba(0, 157, 255, 0.45);
+}
+
+.docmed-preloader__bpm.is-pulse {
+  animation: docmed-num-heartbeat 0.4s ease-in-out;
+}
+
+.docmed-preloader__heart {
+  font-size: 2rem;
+  margin-top: 0.35rem;
+  opacity: 0.85;
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.docmed-preloader__heart.is-beat {
+  opacity: 1;
+  animation: docmed-heart-heartbeat 0.4s ease-in-out;
+}
+
+.docmed-preloader__label {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.docmed-preloader__intro {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.85) 45%,
+    rgba(255, 255, 255, 0.35) 100%
+  );
+}
+
+.docmed-preloader__welcome {
+  margin: 0;
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #93ccff;
+  text-shadow: 0 0 16px rgba(0, 157, 255, 0.45);
+  opacity: 0;
+  transform: translateY(72px);
+  /* Keep this line locked once it arrives — DocMed appears below without shifting it */
+  position: relative;
+  z-index: 1;
+}
+
+.docmed-preloader__welcome.is-in {
+  animation: docmed-rise-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.docmed-preloader__logo-wrap {
+  position: absolute;
+  top: calc(50% + 1.65rem);
+  left: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  opacity: 0;
+  transform: translate(-50%, 72px);
+}
+
+.docmed-preloader__logo-wrap.is-in {
+  animation: docmed-brand-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.docmed-preloader__mark {
+  position: relative;
+  display: inline-flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.85rem;
+  background: #009dff;
+  box-shadow: 0 0 18px rgba(0, 157, 255, 0.45);
+  flex-shrink: 0;
+}
+
+.docmed-preloader__mark-plus {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.docmed-preloader__mark-plus::before,
+.docmed-preloader__mark-plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #fff;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+}
+
+.docmed-preloader__mark-plus::before {
+  width: 100%;
+  height: 0.34rem;
+}
+
+.docmed-preloader__mark-plus::after {
+  width: 0.34rem;
+  height: 100%;
+}
+
+.docmed-preloader__logo-name {
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #009dff;
+  text-shadow: 0 0 16px rgba(0, 157, 255, 0.35);
+}
+
+@keyframes docmed-ekg-shuffle {
+  0% {
+    background-position: 83.3% 0;
+  }
+  16.6% {
+    background-position: 33.33% 0;
+  }
+  33.3% {
+    background-position: 66.66% 0;
+  }
+  50% {
+    background-position: 16.66% 0;
+  }
+  66.6% {
+    background-position: 50% 0;
+  }
+  83.3% {
+    background-position: 0% 0;
+  }
+}
+
+/* Slow bump — finishes before the next digit */
+@keyframes docmed-num-heartbeat {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 8px rgba(0, 157, 255, 0.45);
+  }
+  40% {
+    transform: scale(1.22);
+    text-shadow: 0 0 16px var(--ekg), 0 0 28px rgba(0, 191, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 8px rgba(0, 157, 255, 0.45);
+  }
+}
+
+@keyframes docmed-heart-heartbeat {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  40% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
+
+@keyframes docmed-pulse-heart {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  18% {
+    transform: scale(1.28);
+    opacity: 1;
+  }
+  36% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+  52% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+  72% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes docmed-ekg-travel {
+  0% {
+    background-position: -380px 0;
+  }
+  100% {
+    background-position: 380px 0;
+  }
+}
+
+@keyframes docmed-ekg-flatline {
+  0% {
+    width: 0;
+    opacity: 0.35;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes docmed-rise-in {
+  0% {
+    opacity: 0;
+    transform: translateY(72px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes docmed-brand-rise {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 72px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .docmed-preloader__row {
+    flex-direction: column;
+  }
+
+  .docmed-preloader__graph {
+    height: 140px;
+    flex-basis: auto;
+  }
+
+  .docmed-preloader__vitals {
+    flex-direction: row;
+    width: 100%;
+    gap: 0.75rem;
+    padding: 0.75rem 0 0;
+    justify-content: center;
+  }
+
+  .docmed-preloader__bpm {
+    font-size: 3rem;
+    width: auto;
+  }
+
+  .docmed-preloader__heart {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  .docmed-preloader__brand {
+    justify-content: flex-end;
+  }
+
+  .docmed-preloader__pulse-heart svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .docmed-preloader__logo-name {
+    font-size: 1.35rem;
+  }
+}
