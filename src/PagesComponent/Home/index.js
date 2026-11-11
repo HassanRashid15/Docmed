@@ -1,9 +1,0 @@
-export { default as MedicalTicker } from './MedicalTicker';
-export { default as HeroSection } from './HeroSection';
-export { default as SectionHeading } from './SectionHeading';
-export { default as EmergencyCards } from './EmergencyCards';
-export { default as SymptomNavigator } from './SymptomNavigator';
-export { default as SpecialtiesGrid } from './SpecialtiesGrid';
-export { default as FeaturedDoctors } from './FeaturedDoctors';
-export { default as HowItWorks } from './HowItWorks';
-export { default as Testimonials } from './Testimonials';

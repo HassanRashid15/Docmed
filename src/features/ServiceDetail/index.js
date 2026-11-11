@@ -1,0 +1,11 @@
+export { default as DetailBreadcrumb } from './sections/DetailBreadcrumb';
+export { default as DetailHero } from './sections/DetailHero';
+export { default as DetailMetrics } from './sections/DetailMetrics';
+export { default as DetailPillars } from './sections/DetailPillars';
+export { default as DetailTech } from './sections/DetailTech';
+export { default as DetailDoctors } from './sections/DetailDoctors';
+export { default as DetailJourney } from './sections/DetailJourney';
+export { default as DetailTestimonial } from './sections/DetailTestimonial';
+export { default as DetailPricing } from './sections/DetailPricing';
+export { default as DetailCTA } from './sections/DetailCTA';
+export { getServiceDetail, SERVICE_DETAILS } from './data';
