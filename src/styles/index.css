@@ -22,6 +22,31 @@
   }
 }
 
+@layer components {
+  .docmed-nav-link {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .docmed-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.25rem;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .docmed-nav-link:hover::after,
+  .docmed-nav-link.is-active::after {
+    width: 100%;
+  }
+}
+
 @layer utilities {
   .services-filter-scroll {
     -ms-overflow-style: none;

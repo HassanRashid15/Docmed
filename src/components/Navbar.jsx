@@ -30,8 +30,8 @@ function MyNavbar({ compact = false }) {
     <nav className="relative bg-transparent">
       {/* Desktop — 1186px+ only; 1024–1185 uses tablet hamburger */}
       <div
-        className={`mx-auto hidden items-center min-[1186px]:flex ${
-          compact ? 'gap-3 px-4 py-2' : 'max-w-[1400px] gap-5 px-6 py-3'
+        className={`mx-auto hidden w-full items-center transition-all duration-500 ease-in-out min-[1186px]:flex ${
+          compact ? 'max-w-none gap-3 px-4 py-2' : 'max-w-[1400px] gap-5 px-6 py-3'
         }`}
       >
         <Link
@@ -41,10 +41,12 @@ function MyNavbar({ compact = false }) {
           <img
             src={nav_logo}
             alt=""
-            className={`w-auto object-contain ${compact ? 'h-8' : 'h-10'}`}
+            className={`w-auto object-contain transition-all duration-500 ease-in-out ${
+              compact ? 'h-8' : 'h-10'
+            }`}
           />
           <span
-            className={`font-semibold tracking-tight text-slate-900 ${
+            className={`font-semibold tracking-tight text-slate-900 transition-all duration-500 ease-in-out ${
               compact ? 'text-base' : 'text-lg'
             }`}
           >
@@ -53,8 +55,8 @@ function MyNavbar({ compact = false }) {
         </Link>
 
         <div
-          className={`flex min-w-0 flex-1 flex-nowrap items-center justify-center ${
-            compact ? 'gap-0.5' : 'gap-1'
+          className={`flex min-w-0 flex-1 flex-nowrap items-center justify-center transition-all duration-500 ease-in-out ${
+            compact ? 'gap-4' : 'gap-5'
           }`}
         >
           {links.map((link) => {
@@ -63,12 +65,12 @@ function MyNavbar({ compact = false }) {
               <Link
                 key={link.label}
                 to={link.to}
-                className={`shrink-0 whitespace-nowrap rounded-lg font-medium no-underline transition-colors ${
-                  compact ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-sm'
+                className={`docmed-nav-link shrink-0 whitespace-nowrap font-medium ${
+                  compact ? 'py-1 text-xs' : 'py-1.5 text-sm'
                 } ${
                   active
-                    ? 'bg-primary-fixed text-on-primary-fixed-variant'
-                    : 'text-slate-600 hover:bg-surface-container-low hover:text-primary'
+                    ? 'is-active text-primary'
+                    : 'text-slate-600 hover:text-primary'
                 }`}
               >
                 {link.label}
@@ -77,10 +79,14 @@ function MyNavbar({ compact = false }) {
           })}
         </div>
 
-        <div className={`flex shrink-0 flex-nowrap items-center ${compact ? 'gap-1.5' : 'gap-2'}`}>
+        <div
+          className={`flex shrink-0 flex-nowrap items-center transition-all duration-500 ease-in-out ${
+            compact ? 'gap-1.5' : 'gap-2'
+          }`}
+        >
           <a
             href={SITE.emergencyPhone.href}
-            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#fde8e8] font-medium text-[#c62828] no-underline hover:bg-[#fcdada] ${
+            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#fde8e8] font-medium text-[#c62828] no-underline transition-all duration-500 ease-in-out hover:bg-[#fcdada] ${
               compact ? 'px-2.5 py-1 text-[11px]' : 'px-3.5 py-2 text-[13px]'
             }`}
           >
@@ -90,7 +96,7 @@ function MyNavbar({ compact = false }) {
 
           <Link
             to={ROUTES.patientPortal}
-            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-secondary-fixed font-medium text-on-secondary-fixed-variant no-underline hover:bg-[#cfd6ef] ${
+            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-secondary-fixed font-medium text-on-secondary-fixed-variant no-underline transition-all duration-500 ease-in-out hover:bg-[#cfd6ef] ${
               compact ? 'px-2.5 py-1 text-[11px]' : 'px-3.5 py-2 text-[13px]'
             }`}
           >
@@ -99,7 +105,7 @@ function MyNavbar({ compact = false }) {
 
           <Link
             to={ROUTES.findDoctors}
-            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-lg bg-primary font-semibold text-white no-underline hover:bg-primary-container ${
+            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-lg bg-primary font-semibold text-white no-underline transition-all duration-500 ease-in-out hover:bg-primary-container ${
               compact ? 'px-3 py-1 text-[11px]' : 'px-4 py-2 text-[13px]'
             }`}
           >
@@ -147,10 +153,10 @@ function MyNavbar({ compact = false }) {
                   key={link.label}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`rounded-lg px-3 py-2.5 text-sm font-medium no-underline ${
+                  className={`docmed-nav-link w-fit px-1 py-2.5 text-sm font-medium ${
                     active
-                      ? 'bg-primary-fixed text-on-primary-fixed-variant'
-                      : 'text-slate-700 hover:bg-surface-container-low'
+                      ? 'is-active text-primary'
+                      : 'text-slate-700 hover:text-primary'
                   }`}
                 >
                   {link.label}

@@ -1001,9 +1001,9 @@ function AiAssistant() {
     : 'Secure clinical chat session active';
 
   return (
-    <aside className="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end">
-      {isOpen && (
-        <div className="pointer-events-auto mb-3 flex h-[min(640px,calc(100vh-7.5rem))] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl bg-surface-container-lowest shadow-[0_20px_35px_-5px_rgba(11,28,48,0.18),0_8px_16px_-6px_rgba(11,28,48,0.08)]">
+    <aside className="pointer-events-none fixed bottom-6 right-6 z-[60]">
+      {isOpen ? (
+        <div className="pointer-events-auto flex h-[min(640px,calc(100vh-3rem))] max-h-[calc(100vh-3rem)] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl bg-surface-container-lowest shadow-[0_20px_35px_-5px_rgba(11,28,48,0.18),0_8px_16px_-6px_rgba(11,28,48,0.08)]">
           <div className="flex shrink-0 items-center justify-between gap-2 bg-primary px-4 py-3 text-on-primary">
             <div className="flex min-w-0 items-center gap-2.5">
               <div className="relative shrink-0">
@@ -1228,39 +1228,40 @@ function AiAssistant() {
             </p>
           </div>
         </div>
-      )}
-
-      <div className="pointer-events-auto relative flex flex-col items-end">
-        <button
-          type="button"
-          onClick={() => (isOpen ? closeAssistant() : openAssistant())}
-          aria-label="DocMed AI Assistant — Online • Dr. Jenkins MD"
-          className="group relative flex h-14 w-14 items-center justify-center rounded-full text-on-primary"
-        >
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-fixed opacity-40" />
-          <div className="relative">
-            <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-on-primary shadow-sm">
-              <img src={nav_logo} alt="" className="h-7 w-auto object-contain" />
+      ) : (
+        <div className="pointer-events-auto relative">
+          <button
+            type="button"
+            onClick={openAssistant}
+            aria-label="DocMed AI Assistant — Online • Dr. Jenkins MD"
+            aria-expanded={false}
+            className="group relative flex h-14 w-14 items-center justify-center rounded-full text-on-primary"
+          >
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-fixed opacity-40" />
+            <div className="relative">
+              <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-on-primary shadow-sm">
+                <img src={nav_logo} alt="" className="h-7 w-auto object-contain" />
+              </div>
+              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-docmed-green-bright" />
             </div>
-            <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-docmed-green-bright" />
-          </div>
-          {unread > 0 && (
-            <span className="absolute -left-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-error font-caption text-caption font-bold text-on-error">
-              {unread}
-            </span>
-          )}
+            {unread > 0 && (
+              <span className="absolute -left-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-error font-caption text-caption font-bold text-on-error">
+                {unread}
+              </span>
+            )}
 
-          <span className="pointer-events-none absolute bottom-full right-0 z-50 mb-3 hidden whitespace-nowrap rounded-lg bg-on-surface px-3 py-1.5 text-left shadow-lg group-hover:block">
-            <span className="block font-label-md text-label-md font-semibold text-surface">
-              DocMed AI Assistant
+            <span className="pointer-events-none absolute bottom-full right-0 z-50 mb-3 hidden whitespace-nowrap rounded-lg bg-on-surface px-3 py-1.5 text-left shadow-lg group-hover:block">
+              <span className="block font-label-md text-label-md font-semibold text-surface">
+                DocMed AI Assistant
+              </span>
+              <span
+                aria-hidden="true"
+                className="absolute right-[1.35rem] top-full h-0 w-0 border-x-[6px] border-t-[7px] border-x-transparent border-t-on-surface"
+              />
             </span>
-            <span
-              aria-hidden="true"
-              className="absolute right-[1.35rem] top-full h-0 w-0 border-x-[6px] border-t-[7px] border-x-transparent border-t-on-surface"
-            />
-          </span>
-        </button>
-      </div>
+          </button>
+        </div>
+      )}
     </aside>
   );
 }

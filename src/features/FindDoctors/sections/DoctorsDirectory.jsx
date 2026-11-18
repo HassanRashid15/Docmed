@@ -5,12 +5,87 @@ import DoctorCard from './DoctorCard';
 import { DOCTORS } from '../data';
 import { ROUTES, SITE } from '../../../constants/siteInfo';
 
-function DoctorsDirectory() {
+function MapView({ doctors }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-outline-variant/40 bg-surface-container-lowest shadow-sm">
+      <div className="relative h-[420px] bg-gradient-to-br from-primary-fixed via-surface-container to-secondary-fixed/40 sm:h-[520px]">
+        <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(to_right,rgba(11_28_48_/_0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(11_28_48_/_0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
+        <div className="absolute left-4 top-4 z-10 rounded-xl bg-surface-container-lowest/95 px-3 py-2 text-label-sm font-semibold text-on-surface shadow-sm backdrop-blur">
+          New York Metro · {doctors.length} specialists on map
+        </div>
+
+        {doctors.map((doctor, index) => {
+          const positions = [
+            'left-[18%] top-[28%]',
+            'left-[58%] top-[22%]',
+            'left-[34%] top-[55%]',
+            'left-[72%] top-[48%]',
+          ];
+          return (
+            <Link
+              key={doctor.id}
+              to={ROUTES.doctor(doctor.id)}
+              className={`absolute z-10 -translate-x-1/2 -translate-y-full ${positions[index % positions.length]}`}
+              title={doctor.name}
+            >
+              <span className="flex flex-col items-center">
+                <span className="rounded-full bg-primary px-2.5 py-1 text-caption font-semibold text-on-primary shadow-md">
+                  {doctor.fee}
+                </span>
+                <span className="mt-1 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-surface-container-lowest bg-white shadow-lg">
+                  <img src={doctor.image} alt="" className="h-full w-full object-cover" />
+                </span>
+                <span className="h-0 w-0 border-x-[6px] border-t-[8px] border-x-transparent border-t-primary" />
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+
+      <div className="grid gap-3 border-t border-outline-variant/30 p-4 sm:grid-cols-2">
+        {doctors.map((doctor) => (
+          <Link
+            key={doctor.id}
+            to={ROUTES.doctor(doctor.id)}
+            className="flex items-center gap-3 rounded-xl bg-surface-container-low/70 p-3 transition-colors hover:bg-surface-container"
+          >
+            <img
+              src={doctor.image}
+              alt={doctor.imageAlt}
+              className="h-12 w-12 rounded-xl object-cover"
+            />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-label-md font-semibold text-on-surface">{doctor.name}</p>
+              <p className="truncate text-caption text-on-surface-variant">
+                {doctor.specialty} · {doctor.location}
+              </p>
+            </div>
+            <span className="shrink-0 text-label-sm font-semibold text-primary">{doctor.fee}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DoctorsDirectory({ view = 'list' }) {
   return (
     <div className="space-y-6 lg:col-span-8 xl:col-span-9">
-      {DOCTORS.map((doctor) => (
-        <DoctorCard key={doctor.id} doctor={doctor} />
-      ))}
+      {view === 'map' ? (
+        <MapView doctors={DOCTORS} />
+      ) : (
+        <div
+          className={
+            view === 'grid'
+              ? 'grid grid-cols-1 gap-3 sm:grid-cols-2'
+              : 'flex flex-col gap-6'
+          }
+        >
+          {DOCTORS.map((doctor) => (
+            <DoctorCard key={doctor.id} doctor={doctor} layout={view} />
+          ))}
+        </div>
+      )}
 
       <div className="flex flex-col items-center justify-between gap-4 pt-6 sm:flex-row">
         <span className="order-2 text-body-md text-on-surface-variant sm:order-1">

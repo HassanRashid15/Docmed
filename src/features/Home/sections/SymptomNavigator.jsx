@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTypewriter } from 'react-simple-typewriter';
 import {
   Bot,
   ShieldCheck,
@@ -12,6 +13,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  Mic,
 } from 'lucide-react';
 import { ROUTES, SITE } from '../../../constants/siteInfo';
 
@@ -50,7 +52,203 @@ const NOTE_PLACEHOLDERS = {
   4: 'Optional: anything else your clinician should know…',
 };
 
+const NOTE_TYPEWRITER_PROMPTS = [
+  'Optional: describe your symptoms in your own words…',
+  'e.g. Sharp pressure when climbing stairs…',
+  'e.g. Palpitations after caffeine or stress…',
+  'e.g. Started yesterday evening and comes in waves…',
+  'Optional: anything else your clinician should know…',
+];
+
 function OptionalNotes({ step, value, onChange, grow = false }) {
+  const [focused, setFocused] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const [isListening, setIsListening] = useState(false);
+  const [waveLevels, setWaveLevels] = useState([0.35, 0.55, 0.85, 0.55, 0.35]);
+  const recognitionRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const mediaStreamRef = useRef(null);
+  const rafRef = useRef(null);
+  const baseValueRef = useRef('');
+  const finalTranscriptRef = useRef('');
+  const valueRef = useRef(value);
+
+  const [typedPlaceholder] = useTypewriter({
+    words: NOTE_TYPEWRITER_PROMPTS,
+    loop: 0,
+    typeSpeed: 55,
+    deleteSpeed: 35,
+    delaySpeed: 1800,
+  });
+
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
+
+  useEffect(() => {
+    if (value || focused || isListening) return undefined;
+    const id = window.setInterval(() => setCursorVisible((v) => !v), 530);
+    return () => window.clearInterval(id);
+  }, [value, focused, isListening]);
+
+  const stopMicVisual = () => {
+    if (rafRef.current) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach((track) => track.stop());
+      mediaStreamRef.current = null;
+    }
+    if (audioContextRef.current) {
+      audioContextRef.current.close().catch(() => {});
+      audioContextRef.current = null;
+    }
+    analyserRef.current = null;
+    setWaveLevels([0.35, 0.55, 0.85, 0.55, 0.35]);
+  };
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.onend = null;
+        recognitionRef.current.stop();
+      } catch (_) {
+        /* ignore */
+      }
+      recognitionRef.current = null;
+    }
+    stopMicVisual();
+    finalTranscriptRef.current = '';
+    setIsListening(false);
+  };
+
+  const startMicVisual = async () => {
+    if (!navigator.mediaDevices?.getUserMedia) return;
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      },
+    });
+    mediaStreamRef.current = stream;
+
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const audioContext = new AudioCtx();
+    audioContextRef.current = audioContext;
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
+
+    const source = audioContext.createMediaStreamSource(stream);
+    const analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    analyser.smoothingTimeConstant = 0.72;
+    source.connect(analyser);
+    analyserRef.current = analyser;
+
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    const bands = 5;
+
+    const tick = () => {
+      if (!analyserRef.current) return;
+      analyserRef.current.getByteFrequencyData(data);
+      const chunk = Math.floor(data.length / bands);
+      const nextLevels = Array.from({ length: bands }, (_, i) => {
+        let sum = 0;
+        const start = i * chunk;
+        for (let j = start; j < start + chunk; j += 1) sum += data[j];
+        const avg = sum / chunk / 255;
+        return Math.max(0.18, Math.min(1, avg * 1.65));
+      });
+      setWaveLevels(nextLevels);
+      rafRef.current = window.requestAnimationFrame(tick);
+    };
+
+    tick();
+  };
+
+  const startListening = async () => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    baseValueRef.current = valueRef.current.trim();
+    finalTranscriptRef.current = '';
+    setFocused(true);
+    setIsListening(true);
+
+    try {
+      await startMicVisual();
+    } catch (_) {
+      // Mic permission denied — still attempt speech recognition if available.
+    }
+
+    if (!SpeechRecognition) {
+      window.setTimeout(() => stopListening(), 2500);
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = navigator.language || 'en-US';
+    recognition.interimResults = true;
+    recognition.continuous = true;
+    recognition.maxAlternatives = 1;
+    recognitionRef.current = recognition;
+
+    recognition.onerror = (event) => {
+      if (event.error === 'aborted' || event.error === 'no-speech') return;
+      stopListening();
+    };
+
+    recognition.onend = () => {
+      if (!recognitionRef.current) return;
+      try {
+        recognitionRef.current.start();
+      } catch (_) {
+        stopListening();
+      }
+    };
+
+    recognition.onresult = (event) => {
+      let interim = '';
+      for (let i = event.resultIndex; i < event.results.length; i += 1) {
+        const chunk = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscriptRef.current = `${finalTranscriptRef.current} ${chunk}`.trim();
+        } else {
+          interim += chunk;
+        }
+      }
+
+      const pieces = [
+        baseValueRef.current,
+        finalTranscriptRef.current,
+        interim.trim(),
+      ].filter(Boolean);
+      onChange(pieces.join(' ').replace(/\s+/g, ' ').trim());
+    };
+
+    try {
+      recognition.start();
+    } catch (_) {
+      stopListening();
+    }
+  };
+
+  const toggleListening = () => {
+    if (isListening) stopListening();
+    else startListening();
+  };
+
+  useEffect(() => () => stopListening(), []);
+
+  useEffect(() => {
+    stopListening();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
   return (
     <div
       className={`mt-4 flex flex-col border-t border-docmed-light/80 pt-3 ${
@@ -63,16 +261,73 @@ function OptionalNotes({ step, value, onChange, grow = false }) {
       >
         Additional notes <span className="font-normal text-slate-400">(optional)</span>
       </label>
-      <textarea
-        id={`symptom-notes-${step}`}
-        rows={grow ? undefined : 3}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={NOTE_PLACEHOLDERS[step]}
-        className={`w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-docmed-blue focus:outline-none focus:ring-2 focus:ring-docmed-blue/20 ${
-          grow ? 'min-h-[120px] flex-1 resize-none' : 'resize-y'
-        }`}
-      />
+      <div className="relative h-full rounded-xl bg-white">
+        {!value && !focused && !isListening && (
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute inset-0 z-0 overflow-hidden px-3.5 py-2.5 pr-12 text-sm text-slate-400 ${
+              grow ? 'min-h-[120px]' : ''
+            }`}
+          >
+            {typedPlaceholder}
+            <span
+              className={`ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-px bg-docmed-blue ${
+                cursorVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          </span>
+        )}
+        <textarea
+          id={`symptom-notes-${step}`}
+          rows={grow ? undefined : 3}
+          value={value}
+          onChange={(e) => {
+            onChange(e.target.value);
+            if (isListening) {
+              baseValueRef.current = e.target.value;
+              finalTranscriptRef.current = '';
+            }
+          }}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder={
+            isListening
+              ? 'Listening… speak your notes'
+              : focused && !value
+              ? NOTE_PLACEHOLDERS[step]
+              : ''
+          }
+          className={`relative z-[1] h-full w-full rounded-xl border border-slate-200 bg-transparent px-3.5 py-2.5 pr-12 pb-10 text-sm text-slate-800 placeholder:text-slate-400 focus:border-docmed-blue focus:outline-none focus:ring-2 focus:ring-docmed-blue/20 ${
+            grow ? 'min-h-[120px] flex-1 resize-none' : 'resize-y'
+          }`}
+        />
+        <button
+          type="button"
+          title={isListening ? 'Stop dictation' : 'Dictate notes'}
+          aria-label={isListening ? 'Stop dictation' : 'Dictate notes'}
+          aria-pressed={isListening}
+          onClick={toggleListening}
+          className={`absolute bottom-2.5 right-2.5 z-[2] flex h-9 w-9 items-center justify-center rounded-full transition ${
+            isListening
+              ? 'bg-docmed-blue text-white shadow-md'
+              : 'bg-docmed-light text-docmed-blue hover:bg-docmed-blue/10'
+          }`}
+        >
+          {isListening ? (
+            <span className="flex h-5 items-center gap-[2px]" aria-hidden="true">
+              {waveLevels.map((level, index) => (
+                <span
+                  key={index}
+                  className="voice-wave-bar voice-wave-bar--live"
+                  style={{ transform: `scaleY(${level})` }}
+                />
+              ))}
+            </span>
+          ) : (
+            <Mic className="h-4 w-4" aria-hidden="true" />
+          )}
+        </button>
+      </div>
     </div>
   );
 }
@@ -196,8 +451,8 @@ function SymptomNavigator() {
           </div>
         </div>
 
-        <div className="py-0">
-          <div className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold sm:gap-x-6">
+        <div className="w-full py-0">
+          <div className="mb-2 grid w-full grid-cols-2 gap-2 text-xs font-semibold sm:grid-cols-4 sm:gap-3">
             {STEPS.map((s) => {
               const done = step > s.id;
               const active = step === s.id;
@@ -208,7 +463,7 @@ function SymptomNavigator() {
                   onClick={() => {
                     if (s.id < step) setStep(s.id);
                   }}
-                  className={`flex items-center gap-1.5 transition-colors ${
+                  className={`flex w-full items-center justify-center gap-1.5 text-center transition-colors sm:justify-start ${
                     active
                       ? 'font-bold text-docmed-blue'
                       : done
@@ -217,14 +472,20 @@ function SymptomNavigator() {
                   } ${s.id < step ? 'cursor-pointer' : 'cursor-default'}`}
                 >
                   {done ? (
-                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
                   ) : active ? (
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-docmed-blue" />
-                  ) : null}
-                  <span className="sm:hidden">{s.id}</span>
-                  <span className="hidden sm:inline">
-                    {s.id}. {s.label}
-                    {active ? ` (Step ${s.id} of 4)` : ''}
+                    <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-docmed-blue" />
+                  ) : (
+                    <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-current text-[9px] leading-none">
+                      {s.id}
+                    </span>
+                  )}
+                  <span className="truncate">
+                    <span className="sm:hidden">{s.label}</span>
+                    <span className="hidden sm:inline">
+                      {s.id}. {s.label}
+                      {active ? ` (Step ${s.id} of 4)` : ''}
+                    </span>
                   </span>
                 </button>
               );
@@ -589,20 +850,47 @@ function SymptomNavigator() {
               </div>
 
               <div className="space-y-2">
-                <Link
-                  to={ROUTES.contact}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-docmed-blue py-2.5 text-sm font-semibold text-white no-underline shadow-sm transition-colors hover:bg-docmed-hover"
-                >
-                  <CalendarDays className="h-4 w-4" />
-                  Schedule Priority Cardiology Visit
-                </Link>
-                <Link
-                  to={ROUTES.contact}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-docmed-blue/20 bg-white py-2.5 text-sm font-semibold text-docmed-blue no-underline shadow-sm transition-colors hover:bg-docmed-light"
-                >
-                  <VideoIcon className="h-4 w-4" />
-                  Start Instant Telehealth Triage
-                </Link>
+                {step === 4 ? (
+                  <>
+                    <Link
+                      to={ROUTES.contact}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-docmed-blue py-2.5 text-sm font-semibold text-white no-underline shadow-sm transition-colors hover:bg-docmed-hover"
+                    >
+                      <CalendarDays className="h-4 w-4" />
+                      Schedule Priority Cardiology Visit
+                    </Link>
+                    <Link
+                      to={ROUTES.contact}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-docmed-blue/20 bg-white py-2.5 text-sm font-semibold text-docmed-blue no-underline shadow-sm transition-colors hover:bg-docmed-light"
+                    >
+                      <VideoIcon className="h-4 w-4" />
+                      Start Instant Telehealth Triage
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      disabled
+                      aria-disabled="true"
+                      title="Complete all steps to choose a care pathway"
+                      className="flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-slate-300 py-2.5 text-sm font-semibold text-white shadow-sm"
+                    >
+                      <CalendarDays className="h-4 w-4" />
+                      Schedule Priority Cardiology Visit
+                    </button>
+                    <button
+                      type="button"
+                      disabled
+                      aria-disabled="true"
+                      title="Complete all steps to choose a care pathway"
+                      className="flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-2.5 text-sm font-semibold text-slate-400 shadow-sm"
+                    >
+                      <VideoIcon className="h-4 w-4" />
+                      Start Instant Telehealth Triage
+                    </button>
+                  </>
+                )}
               </div>
 
               <div className="flex items-start gap-2 rounded-xl bg-red-50 p-2.5 text-red-800">

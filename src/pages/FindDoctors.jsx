@@ -32,7 +32,7 @@ function FindDoctors() {
           <div className="mx-auto w-full max-w-7xl px-6 pb-16 lg:px-12">
             <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
               <FiltersSidebar />
-              <DoctorsDirectory />
+              <DoctorsDirectory view={view} />
             </div>
           </div>
         </div>

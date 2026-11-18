@@ -79,29 +79,39 @@ export default function ComingSoon() {
               of productivity and connectivity right from your smartphone.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-3 pt-2 sm:gap-4">
               <button
                 type="button"
                 onClick={handleButtonClick}
-                className="inline-flex items-center gap-3 rounded-xl bg-white px-5 py-3 text-slate-900 shadow-md transition-all hover:-translate-y-0.5 hover:bg-docmed-light"
+                aria-label="Download on the App Store"
+                className="inline-flex h-14 w-full max-w-[200px] items-center gap-3 rounded-xl bg-white px-4 py-2.5 text-slate-900 shadow-md transition-all hover:-translate-y-0.5 hover:bg-docmed-light sm:w-[200px]"
               >
                 <AppleIcon />
-                <div className="text-left">
-                  <span className="block text-[11px] leading-none text-slate-500">Download on the</span>
-                  <span className="block text-sm font-semibold leading-tight">App Store</span>
-                </div>
+                <span className="min-w-0 flex-1 text-left">
+                  <span className="block text-[10px] font-medium leading-none tracking-wide text-slate-500">
+                    Download on the
+                  </span>
+                  <span className="mt-0.5 block truncate text-[15px] font-semibold leading-tight">
+                    App Store
+                  </span>
+                </span>
               </button>
 
               <button
                 type="button"
                 onClick={handleButtonClick}
-                className="inline-flex items-center gap-3 rounded-xl bg-white px-5 py-3 text-slate-900 shadow-md transition-all hover:-translate-y-0.5 hover:bg-docmed-light"
+                aria-label="Get it on Google Play"
+                className="inline-flex h-14 w-full max-w-[200px] items-center gap-3 rounded-xl bg-white px-4 py-2.5 text-slate-900 shadow-md transition-all hover:-translate-y-0.5 hover:bg-docmed-light sm:w-[200px]"
               >
                 <GooglePlayIcon />
-                <div className="text-left">
-                  <span className="block text-[11px] leading-none text-slate-500">Get it on</span>
-                  <span className="block text-sm font-semibold leading-tight">Google Play</span>
-                </div>
+                <span className="min-w-0 flex-1 text-left">
+                  <span className="block text-[10px] font-medium leading-none tracking-wide text-slate-500">
+                    Get it on
+                  </span>
+                  <span className="mt-0.5 block truncate text-[15px] font-semibold leading-tight">
+                    Google Play
+                  </span>
+                </span>
               </button>
             </div>
           </div>

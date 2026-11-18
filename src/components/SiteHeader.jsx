@@ -21,15 +21,17 @@ function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50">
       <MedicalTicker />
       <div
-        className={`mx-auto w-full transition-all duration-500 ease-in-out ${
-          compact ? 'min-[1186px]:max-w-[1200px] min-[1186px]:px-4 min-[1186px]:pt-0' : ''
+        className={`mx-auto w-full transition-[max-width,padding,transform] duration-500 ease-in-out will-change-[max-width] ${
+          compact
+            ? 'min-[1186px]:max-w-[1200px] min-[1186px]:px-4 min-[1186px]:pt-0'
+            : 'max-w-none px-0 pt-0'
         }`}
       >
         <div
-          className={`overflow-visible bg-white transition-all duration-500 ease-in-out ${
+          className={`overflow-visible bg-white transition-[border-radius,box-shadow,border-color,padding] duration-500 ease-in-out ${
             compact
               ? 'border border-outline-variant/40 shadow-lg min-[1186px]:rounded-2xl'
-              : 'border-b border-outline-variant/50 shadow-sm'
+              : 'border-b border-outline-variant/50 shadow-sm min-[1186px]:rounded-none'
           }`}
         >
           <Navbar compact={compact} />

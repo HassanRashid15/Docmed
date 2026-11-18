@@ -15,15 +15,15 @@ function Footer() {
     e.preventDefault();
     setEmail('');
   };
-
+ 
   return (
-    <footer className="mt-20 w-full bg-surface-container-low [&_a]:no-underline [&_ul]:mb-0">
+    <footer className="mt-0 w-full bg-surface-container-low [&_a]:no-underline [&_ul]:mb-0">
       <div className="mx-auto max-w-7xl px-6 pb-2 pt-16 lg:px-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <img alt={`${SITE.name} Logo`} className="h-10 w-auto object-contain" src={nav_logo} />
-              <span className="text-title text-primary">{SITE.legalName}</span>
+              <span className="text-title text-on-surface">{SITE.legalName}</span>
             </div>
             <p className="max-w-sm text-body-md text-on-surface-variant">{SITE.description}</p>
             <div className="space-y-1 pt-1 text-body-md text-on-surface-variant">
